@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Club Data Readiness Score | TransferRoom Intelligence Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070d14;
+    --bg2: #0b1420;
+    --bg3: #101c2c;
+    --border: #1a2a3d;
+    --accent: #0e9655;
+    --accent2: #12b564;
+    --accent-soft: rgba(14,150,85,0.10);
+    --text: #e8edf5;
+    --text-muted: #7a8fa3;
+    --text-dim: #3d5268;
+    --danger: #e55843;
+    --warning: #ffba0f;
+    --font: 'Space Grotesk', system-ui, sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:var(--font); font-size:18px; line-height:1.6; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; }
+
+  .quiz-wrap {
+    max-width:700px;
+    width:100%;
+    padding:60px 24px 80px;
+  }
+
+  .quiz-header { text-align:center; margin-bottom:48px; }
+  .quiz-eyebrow {
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--accent-soft);
+    border:1px solid rgba(14,150,85,0.3);
+    color:var(--accent2);
+    padding:5px 16px;
+    border-radius:100px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+  }
+  .quiz-header h1 {
+    font-size:38px;
+    font-weight:800;
+    letter-spacing:-1.5px;
+    color:#fff;
+    line-height:1.15;
+    margin-bottom:14px;
+  }
+  .quiz-header p {
+    font-size:16px;
+    color:var(--text-muted);
+    max-width:540px;
+    margin:0 auto;
+    line-height:1.7;
+  }
+
+  /* PROGRESS */
+  .progress-wrap { margin-bottom:36px; }
+  .progress-label { display:flex; justify-content:space-between; font-size:12px; color:var(--text-dim); margin-bottom:8px; }
+  .progress-bar { background:var(--border); border-radius:100px; height:4px; }
+  .progress-fill {
+    background:linear-gradient(90deg, var(--accent), var(--accent2));
+    height:4px;
+    border-radius:100px;
+    transition:width 0.4s ease;
+  }
+
+  /* QUESTION CARDS */
+  .question-card {
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:36px 32px;
+    display:none;
+  }
+  .question-card.active { display:block; }
+  .q-number {
+    font-size:11px;
+    font-weight:700;
+    color:var(--accent2);
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:14px;
+  }
+  .q-text {
+    font-size:22px;
+    font-weight:700;
+    color:#fff;
+    line-height:1.3;
+    margin-bottom:28px;
+    letter-spacing:-0.3px;
+  }
+  .options { display:flex; flex-direction:column; gap:10px; }
+  .option-btn {
+    background:var(--bg3);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 20px;
+    font-size:15px;
+    color:var(--text-muted);
+    cursor:pointer;
+    text-align:left;
+    transition:all 0.15s;
+    font-family:var(--font);
+    line-height:1.4;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .option-btn:hover { border-color:var(--accent); color:var(--text); background:rgba(14,150,85,0.05); }
+  .option-btn.selected { border-color:var(--accent2); background:var(--accent-soft); color:#fff; }
+  .option-btn .opt-indicator {
+    width:20px; height:20px;
+    border-radius:50%;
+    border:2px solid var(--border);
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:10px;
+    font-weight:700;
+    transition:all 0.15s;
+  }
+  .option-btn.selected .opt-indicator { border-color:var(--accent2); background:var(--accent2); color:#fff; }
+
+  .q-nav { display:flex; justify-content:flex-end; margin-top:24px; }
+  .next-btn {
+    background:var(--accent);
+    color:#fff;
+    padding:13px 28px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:700;
+    border:none;
+    cursor:pointer;
+    font-family:var(--font);
+    transition:background 0.2s;
+    display:none;
+  }
+  .next-btn:hover { background:var(--accent2); }
+  .next-btn.show { display:block; }
+
+  /* EMAIL GATE */
+  #email-gate {
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:40px 32px;
+    display:none;
+    text-align:center;
+  }
+  #email-gate.active { display:block; }
+  #email-gate h2 { font-size:26px; font-weight:800; color:#fff; margin-bottom:14px; letter-spacing:-0.5px; }
+  #email-gate p { font-size:15px; color:var(--text-muted); margin-bottom:28px; line-height:1.7; }
+  .email-form { display:flex; flex-direction:column; gap:14px; max-width:380px; margin:0 auto; }
+  .email-form input {
+    background:var(--bg3);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 18px;
+    font-size:15px;
+    color:#fff;
+    font-family:var(--font);
+    outline:none;
+    transition:border 0.2s;
+  }
+  .email-form input:focus { border-color:var(--accent); }
+  .email-form input::placeholder { color:var(--text-dim); }
+  .email-form button {
+    background:var(--accent);
+    color:#fff;
+    padding:14px 28px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:700;
+    border:none;
+    cursor:pointer;
+    font-family:var(--font);
+    transition:background 0.2s;
+  }
+  .email-form button:hover { background:var(--accent2); }
+  .email-form .privacy { font-size:11px; color:var(--text-dim); text-align:center; }
+
+  /* RESULTS */
+  #results-panel {
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:48px 36px;
+    display:none;
+    text-align:center;
+  }
+  #results-panel.active { display:block; }
+
+  /* SVG DIAL */
+  .dial-wrap {
+    display:flex;
+    justify-content:center;
+    margin-bottom:32px;
+    position:relative;
+  }
+  .dial-svg { width:200px; height:120px; }
+  .dial-label {
+    position:absolute;
+    bottom:4px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:var(--mono);
+    font-size:36px;
+    font-weight:700;
+    color:var(--accent2);
+  }
+  .dial-sublabel {
+    font-size:11px;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+
+  .result-tier {
+    font-size:22px;
+    font-weight:800;
+    color:#fff;
+    margin:10px 0 16px;
+  }
+  .result-desc {
+    font-size:16px;
+    color:var(--text-muted);
+    line-height:1.7;
+    max-width:500px;
+    margin:0 auto 32px;
+  }
+  .result-bullets {
+    background:var(--bg3);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:24px 28px;
+    text-align:left;
+    margin-bottom:28px;
+  }
+  .result-bullets h4 { font-size:14px; font-weight:700; color:#fff; margin-bottom:14px; text-transform:uppercase; letter-spacing:0.8px; }
+  .result-bullets ul { list-style:none; }
+  .result-bullets ul li { font-size:14px; color:var(--text-muted); padding:8px 0; border-bottom:1px solid var(--border); display:flex; gap:10px; line-height:1.5; }
+  .result-bullets ul li:last-child { border-bottom:none; }
+  .result-bullets ul li::before { content:'→'; color:var(--accent2); font-weight:700; flex-shrink:0; }
+
+  .cta-btn {
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    padding:16px 36px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:700;
+    text-decoration:none;
+    transition:all 0.2s;
+    margin-bottom:12px;
+  }
+  .cta-btn:hover { background:var(--accent2); transform:translateY(-2px); }
+  .cta-note { font-size:12px; color:var(--text-dim); }
+
+  @media (max-width: 600px) {
+    .quiz-header h1 { font-size:28px; }
+    .q-text { font-size:18px; }
+    .question-card, #email-gate, #results-panel { padding:24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="quiz-wrap">
+
+  <!-- HEADER -->
+  <div class="quiz-header">
+    <div class="quiz-eyebrow">Data Readiness Audit</div>
+    <h1>How well does your club's data stack support the transfer window?</h1>
+    <p>8 questions. 2 minutes. Discover whether your club has the analytics infrastructure to compete in the summer window — and where the gaps are costing deals.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progress-wrap">
+    <div class="progress-label">
+      <span id="progress-text">Question 1 of 8</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-card active" id="q1" data-q="1">
+    <div class="q-number">Question 01 of 08</div>
+    <p class="q-text">How does your club currently discover new data analytics tools?</p>
+    <div class="options">
+      <button class="option-btn" data-value="1" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Conference attendance — Soccerex, World Football Summit, events
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Peer networks — other analysts recommend tools they use
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Direct vendor outreach — companies contact us proactively
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Formal RFP process — structured evaluation with multiple vendors
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-1" onclick="nextQuestion(1)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-card" id="q2" data-q="2">
+    <div class="q-number">Question 02 of 08</div>
+    <p class="q-text">When did your club last formally evaluate your data analytics stack?</p>
+    <div class="options">
+      <button class="option-btn" data-value="1" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        This season — we are currently evaluating or recently completed a review
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Last season — we reviewed 12 to 24 months ago
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        We have never done a formal evaluation — we use what we have always used
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-2" onclick="nextQuestion(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-card" id="q3" data-q="3">
+    <div class="q-number">Question 03 of 08</div>
+    <p class="q-text">How many people are typically involved in data tool decisions at your club?</p>
+    <div class="options">
+      <button class="option-btn" data-value="1" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Analyst only — I (or my team) decide independently
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Analytics function plus Director of Football — shared decision
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Full committee — Director of Football, CEO/COO, and budget holders
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-3" onclick="nextQuestion(3)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-card" id="q4" data-q="4">
+    <div class="q-number">Question 04 of 08</div>
+    <p class="q-text">How do analytics vendors typically reach your club about new tools?</p>
+    <div class="options">
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        We find them — we research and reach out proactively
+      </button>
+      <button class="option-btn" data-value="1" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        They find us — vendors reach out directly to analysts and data staff
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Mixed — some inbound, some we discover at conferences or through peers
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-4" onclick="nextQuestion(4)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-card" id="q5" data-q="5">
+    <div class="q-number">Question 05 of 08</div>
+    <p class="q-text">What is your club's primary use case for data analytics?</p>
+    <div class="options">
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Performance analytics — tracking player performance and fitness data
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Recruitment and scouting — player identification and shortlisting
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Opposition analysis — match preparation and tactical intelligence
+      </button>
+      <button class="option-btn" data-value="1" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Commercial analytics — ticketing, fan engagement, revenue optimisation
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-5" onclick="nextQuestion(5)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-card" id="q6" data-q="6">
+    <div class="q-number">Question 06 of 08</div>
+    <p class="q-text">How far in advance does your club shortlist tools for the summer window?</p>
+    <div class="options">
+      <button class="option-btn" data-value="1" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        6 months or more in advance — we plan tool evaluations in January/February
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        3 to 6 months — we begin shortlisting in March/April
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Last minute — decisions happen close to or during the window
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-6" onclick="nextQuestion(6)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-card" id="q7" data-q="7">
+    <div class="q-number">Question 07 of 08</div>
+    <p class="q-text">Does your club have a dedicated Head of Analysis or equivalent data leadership role?</p>
+    <div class="options">
+      <button class="option-btn" data-value="1" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Yes — dedicated Head of Analysis in post, full-time data function
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        No — data analysis is handled by a performance analyst or part-time role
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Outsourced — we use a third-party analytics provider for data work
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-7" onclick="nextQuestion(7)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-card" id="q8" data-q="8">
+    <div class="q-number">Question 08 of 08</div>
+    <p class="q-text">What is your primary frustration with current vendor relationships?</p>
+    <div class="options">
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Coverage gaps — the data does not cover the leagues or players we care about
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Price — the tools are useful but the cost is hard to justify on our budget
+      </button>
+      <button class="option-btn" data-value="2" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Support and responsiveness — slow to answer questions, poor onboarding
+      </button>
+      <button class="option-btn" data-value="3" onclick="selectOption(this)">
+        <span class="opt-indicator"></span>
+        Integration — tools do not talk to each other, creating manual work
+      </button>
+    </div>
+    <div class="q-nav">
+      <button class="next-btn" id="next-8" onclick="showEmailGate()">See My Score →</button>
+    </div>
+  </div>
+
+  <!-- EMAIL GATE -->
+  <div id="email-gate">
+    <h2>Your data readiness score is ready</h2>
+    <p>Enter your details to see your score and the specific gaps the analysis identified for clubs at your tier.</p>
+    <div class="email-form">
+      <input type="text" id="gate-name" placeholder="Your name" autocomplete="name">
+      <input type="text" id="gate-club" placeholder="Club name">
+      <input type="email" id="gate-email" placeholder="Work email" autocomplete="email">
+      <button onclick="showResults()">See My Score</button>
+      <div class="privacy">Your details are used only to send this report. No spam.</div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results-panel">
+    <div class="dial-wrap">
+      <svg class="dial-svg" viewBox="0 0 200 120" id="score-dial">
+        <!-- Background arc -->
+        <path d="M 20 110 A 90 90 0 0 1 180 110" stroke="#1a2a3d" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <!-- Score arc (animated via JS) -->
+        <path d="M 20 110 A 90 90 0 0 1 180 110" stroke="url(#dial-grad)" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" id="dial-arc"/>
+        <defs>
+          <linearGradient id="dial-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#0e9655"/>
+            <stop offset="100%" style="stop-color:#22d47b"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="dial-label" id="score-number">--</div>
+    </div>
+    <div class="dial-sublabel" id="score-tier-label">Score out of 24</div>
+    <div class="result-tier" id="result-tier">Calculating...</div>
+    <p class="result-desc" id="result-desc"></p>
+    <div class="result-bullets" id="result-bullets"></div>
+    <a href="https://cal.com/jean-m-8f4kbr/15min" target="_blank" class="cta-btn">See the Full 28-Club List</a>
+    <div class="cta-note">Jean maps the clubs in your tier that are actively evaluating data tools this summer window.</div>
+  </div>
+
+</div>
+
+<script>
+  const answers = [];
+  let totalScore = 0;
+
+  function selectOption(btn) {
+    const card = btn.closest('.question-card');
+    card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const qNum = parseInt(card.dataset.q);
+    const nextBtn = document.getElementById('next-' + qNum);
+    if (nextBtn) nextBtn.classList.add('show');
+  }
+
+  function nextQuestion(current) {
+    const card = document.getElementById('q' + current);
+    const selected = card.querySelector('.option-btn.selected');
+    if (!selected) return;
+    const val = parseInt(selected.dataset.value);
+    answers[current - 1] = val;
+    totalScore += val;
+    card.classList.remove('active');
+    if (current < 8) {
+      document.getElementById('q' + (current + 1)).classList.add('active');
+      updateProgress(current + 1);
+    }
+  }
+
+  function updateProgress(step) {
+    const pct = Math.round(((step - 1) / 8) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = 'Question ' + step + ' of 8';
+    document.getElementById('progress-pct').textContent = pct + '%';
+  }
+
+  function showEmailGate() {
+    const card = document.getElementById('q8');
+    const selected = card.querySelector('.option-btn.selected');
+    if (!selected) return;
+    const val = parseInt(selected.dataset.value);
+    answers[7] = val;
+    totalScore += val;
+    card.classList.remove('active');
+    document.getElementById('email-gate').classList.add('active');
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-text').textContent = 'Almost done';
+    document.getElementById('progress-pct').textContent = '100%';
+  }
+
+  function showResults() {
+    const name = document.getElementById('gate-name').value.trim() || 'there';
+    const email = document.getElementById('gate-email').value.trim();
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address to see your results.');
+      return;
+    }
+    document.getElementById('email-gate').classList.remove('active');
+    const panel = document.getElementById('results-panel');
+    panel.classList.add('active');
+    document.getElementById('score-number').textContent = totalScore;
+
+    let tier, desc, bullets;
+    if (totalScore <= 12) {
+      tier = 'Strong Data Infrastructure';
+      desc = 'Your club has systematic data practices and a structured approach to tool evaluation. The gap is in live market intelligence — specifically which clubs in your tier are actively looking to buy or sell before the window opens. That intelligence is what TransferRoom's data product layer provides.';
+      bullets = [
+        'Your evaluation process is structured — you shortlist tools formally before the window',
+        'The analytics function is involved in decisions — you have a Head of Analysis or equivalent',
+        'The missing layer: live market availability data to complement your existing analytics stack',
+        '28 clubs with confirmed buying signals — see which ones are in your evaluation tier'
+      ];
+    } else if (totalScore <= 19) {
+      tier = 'Moderate Data Gap';
+      desc = 'Your club has analytics capability but the process for discovering and evaluating new tools is informal. You are relying on conferences and peer networks rather than systematic outreach — which means your shortlist only includes tools that happened to reach you. The clubs winning the data advantage are building their shortlists more systematically.';
+      bullets = [
+        'Tool discovery is reactive — you find what reaches you, not the best available options',
+        'The decision process involves multiple people but lacks a formal evaluation framework',
+        'Your summer window prep starts later than the clubs beating you to targets',
+        'The analytics function needs a direct channel to evaluate live market tools like TransferRoom data'
+      ];
+    } else {
+      tier = 'High Data Gap — Action Needed';
+      desc = 'Your club is operating with significant gaps in its data infrastructure. You are discovering tools late, evaluating informally, and missing the pre-window preparation window that competing clubs use to build their shortlists. This is costing you decisions — wrong players, missed targets, and transfers completed by competitors who moved faster with better data.';
+      bullets = [
+        'Tool evaluation is ad hoc — no formal process, no structured shortlisting before windows',
+        'The analytics function is not empowered to drive data decisions independently',
+        'You are reactive in the market — clubs with better data found your targets first',
+        'The infrastructure to support systematic recruitment does not exist yet — this is the gap'
+      ];
+    }
+
+    document.getElementById('result-tier').textContent = tier;
+    document.getElementById('result-desc').textContent = desc;
+    const bulletsEl = document.getElementById('result-bullets');
+    bulletsEl.innerHTML = '<h4>What this means for your club</h4><ul>' +
+      bullets.map(b => '<li>' + b + '</li>').join('') +
+      '</ul>';
+
+    // Animate dial
+    const arc = document.getElementById('dial-arc');
+    const pct = totalScore / 24;
+    const offset = 283 - (283 * pct * 0.9); // 0.9 to cap arc visually
+    setTimeout(() => {
+      arc.style.transition = 'stroke-dashoffset 1.2s ease';
+      arc.style.strokeDashoffset = offset;
+    }, 200);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TransferRoom — GTM Plan | MDB Growth Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0b1120; --bg2:#0f1929; --bg3:#131e2e; --bg4:#1a2740;
+    --border:#1e2f45; --accent:#0e9655; --accent2:#12b564;
+    --accent-soft:rgba(14,150,85,0.10); --text:#e8edf5; --text-muted:#8897a8;
+    --text-dim:#4e6075; --danger:#e55843; --warning:#ffba0f;
+    --font:'Space Grotesk',system-ui,sans-serif; --mono:'Space Mono',monospace;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.7;}
+  .wrap{max-width:1100px;margin:0 auto;padding:60px 48px 100px;}
+  h1{font-size:42px;font-weight:800;letter-spacing:-1.5px;color:#fff;line-height:1.1;margin-bottom:14px;}
+  h1 span{color:var(--accent2);}
+  .subtitle{font-size:17px;color:var(--text-muted);max-width:600px;line-height:1.7;margin-bottom:48px;}
+  h2{font-size:24px;font-weight:800;color:#fff;letter-spacing:-0.5px;margin-bottom:8px;}
+  h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:10px;}
+  .eyebrow{font-size:11px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+  .section{margin-bottom:60px;}
+  /* PILLARS */
+  .pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:40px;}
+  .pillar{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:22px 18px;}
+  .pillar-num{font-size:28px;font-weight:900;color:var(--accent2);font-family:var(--mono);margin-bottom:10px;line-height:1;}
+  .pillar h3{font-size:13px;margin-bottom:8px;}
+  .pillar p{font-size:12px;color:var(--text-muted);margin:0;line-height:1.5;}
+  .pillar-kpi{font-size:11px;color:var(--accent2);margin-top:12px;font-weight:700;}
+  .pillar-tools{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+  .tool-tag{font-size:10px;background:var(--bg3);border:1px solid var(--border);color:var(--text-dim);padding:3px 8px;border-radius:4px;}
+  /* SEQUENCE TABLE */
+  .seq-table{width:100%;border-collapse:collapse;margin-bottom:40px;}
+  .seq-table th{font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.8px;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+  .seq-table td{padding:14px;font-size:13px;color:var(--text-muted);border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
+  .seq-table tr:last-child td{border-bottom:none;}
+  .seq-table .day{font-family:var(--mono);font-size:13px;color:var(--accent2);font-weight:700;}
+  .seq-table .action{font-weight:600;color:#fff;}
+  .ch-badge{display:inline-block;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700;}
+  .ch-email{background:rgba(14,150,85,0.15);color:var(--accent2);}
+  .ch-li{background:rgba(0,119,181,0.15);color:#3b9ed4;}
+  .ch-nurture{background:rgba(255,186,15,0.12);color:var(--warning);}
+  /* ROADMAP */
+  .roadmap{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .phase-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:26px 22px;}
+  .phase-label{font-size:11px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+  .phase-card h3{font-size:16px;margin-bottom:14px;}
+  .phase-card ul{list-style:none;}
+  .phase-card ul li{font-size:13px;color:var(--text-muted);padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;line-height:1.4;}
+  .phase-card ul li:last-child{border-bottom:none;}
+  .phase-card ul li::before{content:'◆';color:var(--accent);font-size:7px;margin-top:7px;flex-shrink:0;}
+  /* KPI ROW */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:40px;}
+  .kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px 16px;text-align:center;}
+  .kpi-card .kpi-num{font-size:32px;font-weight:900;color:var(--accent2);font-family:var(--mono);margin-bottom:6px;line-height:1;}
+  .kpi-card .kpi-label{font-size:11px;color:var(--text-muted);font-weight:600;}
+  /* CTA */
+  .cta-block{background:linear-gradient(135deg,#0b1b10 0%,#0a1520 100%);border:1px solid rgba(14,150,85,0.25);border-radius:14px;padding:40px 36px;text-align:center;margin-top:48px;}
+  .cta-block h2{font-size:28px;margin-bottom:12px;}
+  .cta-block p{font-size:15px;color:var(--text-muted);margin-bottom:24px;max-width:460px;margin-left:auto;margin-right:auto;}
+  .btn{display:inline-block;background:var(--accent);color:#fff;padding:14px 30px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;transition:background 0.2s;}
+  .btn:hover{background:var(--accent2);}
+  @media(max-width:800px){.pillars{grid-template-columns:1fr 1fr;}.roadmap{grid-template-columns:1fr;}.kpi-row{grid-template-columns:1fr 1fr;}}
+  @media print{body{background:#fff;color:#111;}.wrap{padding:24px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">GTM Plan — TransferRoom Data Products</div>
+  <h1>Five Pillars. <span>10-Day Sequence.</span> 12-Week Roadmap.</h1>
+  <p class="subtitle">The commercial motion that reaches club analytics buyers before the summer window shortlists lock. Built for Neal Stanborough, CRO — May 2026.</p>
+
+  <!-- KPIs -->
+  <div class="section">
+    <div class="eyebrow">Success Metrics — Day 90</div>
+    <div class="kpi-row">
+      <div class="kpi-card"><div class="kpi-num">5–8</div><div class="kpi-label">New commercial conversations with club data decision-makers</div></div>
+      <div class="kpi-card"><div class="kpi-num">150+</div><div class="kpi-label">Qualified contacts delivered (Head of Analysis, Director of Football)</div></div>
+      <div class="kpi-card"><div class="kpi-num">3–5%</div><div class="kpi-label">Target reply rate on Tier 1 outreach (benchmark for specific outreach)</div></div>
+      <div class="kpi-card"><div class="kpi-num">1–2</div><div class="kpi-label">Data product trials initiated from Tier 1 club contacts</div></div>
+    </div>
+  </div>
+
+  <!-- 5 PILLARS -->
+  <div class="section">
+    <div class="eyebrow">Five GTM Pillars</div>
+    <h2>The commercial motion TransferRoom does not have yet</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>Club analytics buyer mapping</h3>
+        <p>Build the universe of Head of Analysis, Data Scientist, and Performance Analyst contacts at Championship, Bundesliga 2, Ligue 2, and Serie B clubs not yet using TransferRoom data products.</p>
+        <div class="pillar-kpi">KPI: 150+ verified contacts</div>
+        <div class="pillar-tools"><span class="tool-tag">Clay</span><span class="tool-tag">LinkedIn Sales Nav</span><span class="tool-tag">Apollo</span></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>Summer window timing channel</h3>
+        <p>Pre-window buying signal detection — clubs confirming data tool stacks in May. Outreach timed to reach buying decision-makers before the shortlist consolidates.</p>
+        <div class="pillar-kpi">KPI: 28 clubs contacted before June</div>
+        <div class="pillar-tools"><span class="tool-tag">SmartLead</span><span class="tool-tag">HubSpot</span></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>Ownership change trigger</h3>
+        <p>New club ownership (CFG, Brera Holdings, Hartono-type investors) = guaranteed data strategy review. Monitor ownership changes and trigger outreach within 30 days of announcement.</p>
+        <div class="pillar-kpi">KPI: 100% ownership-change clubs contacted within 30 days</div>
+        <div class="pillar-tools"><span class="tool-tag">Clay</span><span class="tool-tag">Companies House API</span></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <h3>Peer network seeding</h3>
+        <p>StatsBomb Conference, PFSA events, and football analytics communities. Content positioning TransferRoom as the thought leader in live market intelligence for clubs — reaching the buyer the conference circuit misses.</p>
+        <div class="pillar-kpi">KPI: 20 LinkedIn content briefs published (analytics function audience)</div>
+        <div class="pillar-tools"><span class="tool-tag">LinkedIn</span><span class="tool-tag">Content Calendar</span></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">05</div>
+        <h3>Case study flywheel</h3>
+        <p>First data product client → quantified result (analyst time saved, signing quality improvement) → case study shared in outreach to next cohort → peer referral accelerates adoption without additional outreach cost.</p>
+        <div class="pillar-kpi">KPI: 1 case study published by Week 12</div>
+        <div class="pillar-tools"><span class="tool-tag">HubSpot</span><span class="tool-tag">LinkedIn</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10-DAY SEQUENCE -->
+  <div class="section">
+    <div class="eyebrow">10-Day Outreach Sequence</div>
+    <h2>Multi-channel. Coordinated. Timed for the summer window.</h2>
+    <table class="seq-table">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Channel</th>
+          <th>Action</th>
+          <th>Target</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="day">Day 0</td>
+          <td><span class="ch-badge ch-email">Email</span></td>
+          <td class="action">Email 1 — Trigger angle (PSS 87)</td>
+          <td>Head of Analysis + Director of Football, Tier 1 clubs</td>
+          <td>Subject: "Data products, summer window." — delivery CTA with 28-club list offer</td>
+        </tr>
+        <tr>
+          <td class="day">Day 1</td>
+          <td><span class="ch-badge ch-li">LinkedIn</span></td>
+          <td class="action">Connection request — with note</td>
+          <td>Neal Stanborough, CRO (primary contact)</td>
+          <td>"I've been looking at how TransferRoom approaches the data product market. Have some findings..."</td>
+        </tr>
+        <tr>
+          <td class="day">Day 3</td>
+          <td><span class="ch-badge ch-email">Email</span></td>
+          <td class="action">Email 2 — Friction angle (PSS 85)</td>
+          <td>Non-responders from Day 0 batch</td>
+          <td>Subject: "Before the shortlist forms." — question CTA, different angle from Email 1</td>
+        </tr>
+        <tr>
+          <td class="day">Day 5</td>
+          <td><span class="ch-badge ch-li">LinkedIn</span></td>
+          <td class="action">Follow-up DM — list preview</td>
+          <td>Accepted connections from Day 1</td>
+          <td>"The 28-club list includes Championship and Bundesliga 2 clubs with new ownership and confirmed analyst hires..."</td>
+        </tr>
+        <tr>
+          <td class="day">Day 7</td>
+          <td><span class="ch-badge ch-email">Email</span></td>
+          <td class="action">Reply to any email responses — qualify</td>
+          <td>Respondents from Days 0–5</td>
+          <td>Three-criteria qualification: budget, use case, timeline. Qualified → transfer to Neal's team with context.</td>
+        </tr>
+        <tr>
+          <td class="day">Day 10</td>
+          <td><span class="ch-badge ch-li">LinkedIn</span></td>
+          <td class="action">Breakup message — specific club names</td>
+          <td>Non-responding LinkedIn connections</td>
+          <td>"Last note from me — if the timing is wrong, no problem. Palermo and Juve Stabia contacts alone might be worth a look..."</td>
+        </tr>
+        <tr>
+          <td class="day">Day 21+</td>
+          <td><span class="ch-badge ch-nurture">Nurture</span></td>
+          <td class="action">HubSpot nurture sequence enters</td>
+          <td>All non-converted contacts from Tier 1 and Tier 2</td>
+          <td>20-week value-only nurture. No pitches. Pure market intelligence. Converts "not now" to pipeline over 12–18 months.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 12-WEEK ROADMAP -->
+  <div class="section">
+    <div class="eyebrow">12-Week Roadmap</div>
+    <h2>Four phases. One system. Owned at Day 90.</h2>
+    <div class="roadmap">
+      <div class="phase-card">
+        <div class="phase-label">Phase 1 — Weeks 1 to 3</div>
+        <h3>Build the universe</h3>
+        <ul>
+          <li>Expand 28-club starter to 150+ qualified contacts</li>
+          <li>Head of Analysis, Data Scientist, Director of Football roles</li>
+          <li>Cross-reference against TransferRoom's existing client list</li>
+          <li>Tier 1 (confirmed buying signals): 50 to 75 contacts</li>
+          <li>Tier 2 (adjacent signals): 75 to 100 contacts</li>
+          <li>Validate contact data — verify employment status before deploy</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Phase 2 — Weeks 4 to 6</div>
+        <h3>Launch outreach — Trigger angle</h3>
+        <ul>
+          <li>Email 1 (Trigger, PSS 87) deployed to Tier 1 contacts</li>
+          <li>LinkedIn connection sequence runs in parallel</li>
+          <li>Open rate monitoring — daily for first week</li>
+          <li>Email 2 (Friction, PSS 85) sent Day 3 to non-responders</li>
+          <li>First qualified conversations begin — transferred to Neal's team</li>
+          <li>Reply rate benchmark: target 3% to 5% on first 50 sends</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Phase 3 — Weeks 7 to 9</div>
+        <h3>Qualify, refine, and expand</h3>
+        <ul>
+          <li>Performance review: which segments (Championship vs Bundesliga 2) respond best</li>
+          <li>Which email angles drive replies — adjust sequencing based on data</li>
+          <li>Expand to Tier 2 contacts with refined targeting</li>
+          <li>Launch parallel Women's Marketplace sequence</li>
+          <li>First trial initiations expected from Tier 1 clubs</li>
+          <li>HubSpot nurture sequence live for all non-converted contacts</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-label">Phase 4 — Weeks 10 to 12</div>
+        <h3>System handover — TransferRoom owns it</h3>
+        <ul>
+          <li>Full targeting database (150+ contacts, tiered, with notes)</li>
+          <li>Email sequence templates — tested against live audience</li>
+          <li>Qualification framework — three-criteria scoring rubric</li>
+          <li>LinkedIn content playbook — 20 briefs for analytics function audience</li>
+          <li>20-week nurture sequence — ready to run independently</li>
+          <li>Performance benchmarks: open rate, reply rate, qualified rate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>See how this runs for TransferRoom</h2>
+    <p>15 minutes. Jean walks through the specific clubs, the email angles, and the qualification framework built for TransferRoom's commercial situation.</p>
+    <a href="https://cal.com/jean-m-8f4kbr/15min" target="_blank" class="btn">Book 15 Minutes</a>
+  </div>
+
+  <div style="margin-top:32px;font-size:12px;color:var(--text-dim);text-align:center;"><em>Strategy and GTM research by Jean Mundabi Fala, MDB Growth Capital — May 2026</em></div>
+</div>
+</body>
+</html>

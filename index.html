@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TransferRoom — MDB Growth Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #0a1628; min-height: 100vh; display: flex; flex-direction: column; color: #fff; }
+
+  /* TOP BAR */
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .topbar-brand { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+  .topbar-status { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: #4ade80; text-transform: uppercase; letter-spacing: 0.8px; }
+  .topbar-status::before { content: ''; width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* HERO */
+  .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px 40px; text-align: center; }
+  .company-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: #e4c878; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 20px; margin-bottom: 28px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); color: #fff; font-weight: 400; line-height: 1.15; margin-bottom: 16px; max-width: 680px; }
+  .hero h1 em { font-style: italic; color: #e4c878; }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.7; margin-bottom: 40px; }
+
+  /* STATS */
+  .stats-row { display: flex; gap: 10px; margin-bottom: 44px; flex-wrap: wrap; justify-content: center; }
+  .stat-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 10px 20px; display: flex; align-items: center; gap: 10px; }
+  .stat-num { font-size: 17px; font-weight: 700; color: #fff; }
+  .stat-div { width: 1px; height: 18px; background: rgba(255,255,255,0.15); }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+  /* CTA */
+  .cta-btn { display: inline-flex; align-items: center; gap: 10px; background: #c9a84c; color: #0a1628; font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 10px; text-decoration: none; transition: background 0.15s, transform 0.1s; margin-bottom: 12px; }
+  .cta-btn:hover { background: #e4c878; transform: translateY(-1px); }
+  .cta-btn svg { width: 17px; height: 17px; }
+  .cta-note { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* ASSETS SECTION */
+  .assets-section { background: rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.07); padding: 48px 24px; }
+  .assets-inner { max-width: 860px; margin: 0 auto; }
+  .assets-label { text-align: center; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.3); margin-bottom: 28px; }
+  .asset-card { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; transition: border-color 0.15s, background 0.15s; }
+  .asset-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.05); }
+  .asset-icon { font-size: 22px; flex-shrink: 0; }
+  .asset-body { flex: 1; min-width: 0; }
+  .asset-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .asset-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+  .asset-link { flex-shrink: 0; font-size: 13px; font-weight: 600; color: #e4c878; text-decoration: none; white-space: nowrap; padding: 6px 14px; border: 1px solid rgba(201,168,76,0.3); border-radius: 6px; transition: background 0.15s; }
+  .asset-link:hover { background: rgba(201,168,76,0.15); }
+
+  /* FOOTER */
+  .footer { text-align: center; padding: 24px; font-size: 12px; color: rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.06); }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 16px 20px; }
+    .stats-row { gap: 8px; }
+    .stat-pill { padding: 8px 14px; }
+    .asset-card { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">MDB Growth Capital</div>
+  <div class="topbar-status">Built for TransferRoom</div>
+</div>
+
+<div class="hero">
+  <div class="company-badge">TransferRoom</div>
+  <h1>We researched TransferRoom.<br>Here's what we <em>found.</em></h1>
+  <p class="hero-sub">Jean spent time analysing TransferRoom before reaching out. Browse the research, the strategy, and the assets prepared for Neal Stanborough — no strings attached.</p>
+
+  <div class="stats-row">
+    <div class="stat-pill"><div class="stat-num">2</div><div class="stat-div"></div><div class="stat-label">Email sequences</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat-pill"><div class="stat-num">7</div><div class="stat-div"></div><div class="stat-label">Assets deployed</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat-pill"><div class="stat-num">✓</div><div class="stat-div"></div><div class="stat-label">Research complete</div></div>
+  </div>
+
+  <a class="cta-btn" href="TransferRoom-Outreach-Package-Neal.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>
+    </svg>
+    Open the Full Analysis
+  </a>
+  <div class="cta-note">Built specifically for TransferRoom — no templates, no guesswork.</div>
+</div>
+
+<div class="assets-section">
+  <div class="assets-inner">
+    <div class="assets-label">What's inside this review</div>
+    
+      <div class="asset-card">
+        <div class="asset-icon">📦</div>
+        <div class="asset-body">
+          <div class="asset-title">Full Growth Analysis</div>
+          <div class="asset-desc">Jean's complete breakdown of TransferRoom's acquisition system — the gaps at every stage and exactly what MDB would install to close them.</div>
+        </div>
+        <a href="TransferRoom-Outreach-Package-Neal.html" class="asset-link">Open &#8594;</a>
+      </div>
+      <div class="asset-card">
+        <div class="asset-icon">🎯</div>
+        <div class="asset-body">
+          <div class="asset-title">Landing Page Mockup</div>
+          <div class="asset-desc">A conversion-optimised mockup built around TransferRoom's audience — real brand colors, rewritten messaging, full conversion architecture.</div>
+        </div>
+        <a href="landing-page-club-data-analytics.html" class="asset-link">Open &#8594;</a>
+      </div>
+      <div class="asset-card">
+        <div class="asset-icon">📊</div>
+        <div class="asset-body">
+          <div class="asset-title">Pipeline Velocity Scorecard</div>
+          <div class="asset-desc">An interactive scorecard that maps your pipeline velocity — current state vs what's possible with the right infrastructure in place.</div>
+        </div>
+        <a href="pvp-scorecard.html" class="asset-link">Open &#8594;</a>
+      </div>
+      <div class="asset-card">
+        <div class="asset-icon">📋</div>
+        <div class="asset-body">
+          <div class="asset-title">Multi-Channel Acquisition Plan</div>
+          <div class="asset-desc">5-pillar GTM plan built for TransferRoom — signal-based targeting, 10-day outreach sequence, 12-week deployment roadmap. The exact playbook MDB would run.</div>
+        </div>
+        <a href="gtm-plan.html" class="asset-link">Open &#8594;</a>
+      </div>
+      <div class="asset-card">
+        <div class="asset-icon">🔄</div>
+        <div class="asset-body">
+          <div class="asset-title">Revenue Funnel Architecture</div>
+          <div class="asset-desc">Signal-to-Revenue Engine: ToFu to BoFu cascade showing what TransferRoom has today, what MDB installs, and what is missing at every stage. Includes the 3 growth loops.</div>
+        </div>
+        <a href="funnel-architecture.html" class="asset-link">Open &#8594;</a>
+      </div>
+      <div class="asset-card">
+        <div class="asset-icon">💬</div>
+        <div class="asset-body">
+          <div class="asset-title">10-Day Multi-Channel Sequence</div>
+          <div class="asset-desc">Day-by-day outreach schedule built for TransferRoom — email, LinkedIn, and Twitter where applicable. Each touch uses a different angle type so no two messages read the same.</div>
+        </div>
+        <a href="outreach-sequence.html" class="asset-link">Open &#8594;</a>
+      </div>
+      <div class="asset-card">
+        <div class="asset-icon">📄</div>
+        <div class="asset-body">
+          <div class="asset-title">Transferroom D100 Neal</div>
+          <div class="asset-desc">Supplementary asset.</div>
+        </div>
+        <a href="TransferRoom-D100-Neal.html" class="asset-link">Open &#8594;</a>
+      </div>
+  </div>
+</div>
+
+<div class="footer">
+  Prepared by MDB Growth Capital for TransferRoom &middot; Strategy &amp; GTM research by Jean Mundabi Fala
+</div>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TransferRoom — Outreach Sequence | MDB Growth Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0b1120; --bg2:#0f1929; --bg3:#131e2e; --bg4:#1a2740;
+    --border:#1e2f45; --accent:#0e9655; --accent2:#12b564;
+    --accent-soft:rgba(14,150,85,0.10); --text:#e8edf5; --text-muted:#8897a8;
+    --text-dim:#4e6075; --danger:#e55843; --warning:#ffba0f; --blue:#3b9ed4;
+    --font:'Space Grotesk',system-ui,sans-serif; --mono:'Space Mono',monospace;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.7;}
+  .wrap{max-width:900px;margin:0 auto;padding:60px 48px 100px;}
+  h1{font-size:38px;font-weight:800;letter-spacing:-1.5px;color:#fff;line-height:1.1;margin-bottom:14px;}
+  h1 span{color:var(--accent2);}
+  .subtitle{font-size:16px;color:var(--text-muted);max-width:580px;line-height:1.7;margin-bottom:48px;}
+  .eyebrow{font-size:11px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+  h2{font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.5px;margin-bottom:8px;}
+
+  /* STATS BAR */
+  .stats-bar{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 28px;display:flex;gap:36px;align-items:center;margin-bottom:52px;flex-wrap:wrap;}
+  .stat-item{text-align:center;}
+  .stat-item .snum{font-size:22px;font-weight:900;color:var(--accent2);font-family:var(--mono);line-height:1;}
+  .stat-item .slabel{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.8px;margin-top:4px;}
+  .stats-divider{width:1px;height:40px;background:var(--border);}
+
+  /* TIMELINE */
+  .timeline{position:relative;padding-left:40px;}
+  .timeline::before{content:'';position:absolute;left:12px;top:16px;bottom:16px;width:2px;background:linear-gradient(to bottom,var(--accent),rgba(14,150,85,0.05));}
+
+  .tl-entry{position:relative;margin-bottom:8px;}
+  .tl-entry:last-child{margin-bottom:0;}
+  .tl-dot{position:absolute;left:-34px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent2);border:3px solid var(--bg);z-index:1;}
+  .tl-dot.li{background:var(--blue);}
+  .tl-dot.nurture{background:var(--warning);}
+  .tl-dot.gap{background:var(--border);width:10px;height:10px;left:-32px;top:22px;}
+
+  .tl-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.15s;}
+  .tl-card:hover{border-color:rgba(14,150,85,0.3);}
+  .tl-header{padding:18px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;cursor:pointer;user-select:none;}
+  .tl-day{font-family:var(--mono);font-size:13px;color:var(--accent2);font-weight:700;min-width:56px;}
+  .tl-ch-badge{padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;}
+  .ch-email{background:rgba(14,150,85,0.15);color:var(--accent2);}
+  .ch-li{background:rgba(59,158,212,0.15);color:var(--blue);}
+  .ch-nurture{background:rgba(255,186,15,0.12);color:var(--warning);}
+  .tl-action{flex:1;font-size:14px;font-weight:600;color:#fff;}
+  .tl-pss{background:var(--accent-soft);border:1px solid rgba(14,150,85,0.3);color:var(--accent2);padding:3px 9px;border-radius:4px;font-size:11px;font-weight:800;font-family:var(--mono);white-space:nowrap;}
+  .tl-toggle{color:var(--text-dim);font-size:14px;transition:transform 0.2s;}
+  .tl-header.open .tl-toggle{transform:rotate(180deg);}
+
+  .tl-body{padding:0 24px 20px;display:none;}
+  .tl-body.open{display:block;}
+  .email-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 20px;font-size:14px;color:var(--text-muted);line-height:1.8;}
+  .email-box p{margin-bottom:10px;}
+  .email-box p:last-child{margin-bottom:0;}
+  .email-box .subj-line{font-size:13px;color:var(--text-dim);margin-bottom:14px;}
+  .li-msg-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 18px;font-size:14px;color:var(--text-muted);line-height:1.6;font-style:italic;}
+  .tl-note{font-size:13px;color:var(--text-dim);margin-top:10px;line-height:1.5;}
+
+  .tl-spacer{height:16px;position:relative;}
+  .tl-spacer::before{content:'· · · · ·';position:absolute;left:-32px;color:var(--text-dim);font-size:10px;top:3px;}
+
+  /* CTA */
+  .cta-block{background:linear-gradient(135deg,#0b1b10 0%,#0a1520 100%);border:1px solid rgba(14,150,85,0.25);border-radius:14px;padding:40px 36px;text-align:center;margin-top:48px;}
+  .cta-block h2{font-size:26px;margin-bottom:12px;}
+  .cta-block p{font-size:15px;color:var(--text-muted);margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto;}
+  .btn{display:inline-block;background:var(--accent);color:#fff;padding:13px 28px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;transition:background 0.2s;}
+  .btn:hover{background:var(--accent2);}
+
+  @media(max-width:600px){.wrap{padding:40px 20px 80px;}.stats-bar{gap:20px;}.tl-header{flex-wrap:wrap;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Outreach Sequence — Neal Stanborough, CRO</div>
+  <h1>21-Day Multi-Channel Sequence<br><span>2 Emails · 3 LinkedIn Touches</span></h1>
+  <p class="subtitle">Day-by-day timeline for the TransferRoom outreach. Email 1 triggers the conversation. LinkedIn runs in parallel. Nurture captures the "not yet" replies at Day 21.</p>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="snum">2</div><div class="slabel">Emails</div></div>
+    <div class="stats-divider"></div>
+    <div class="stat-item"><div class="snum">3</div><div class="slabel">LinkedIn touches</div></div>
+    <div class="stats-divider"></div>
+    <div class="stat-item"><div class="snum">21</div><div class="slabel">Day sequence</div></div>
+    <div class="stats-divider"></div>
+    <div class="stat-item"><div class="snum">86</div><div class="slabel">PSS avg</div></div>
+    <div class="stats-divider"></div>
+    <div class="stat-item"><div class="snum">87/85</div><div class="slabel">PSS scores</div></div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+
+    <!-- DAY 0 — LINKEDIN DM TEXT HOOK -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 0</span>
+          <span style="background:#0a66c2; color:#fff; padding:2px 8px; border-radius:4px; font-size:11px; margin-left:8px; font-weight:600;">LinkedIn DM</span>
+          <strong>LinkedIn DM — Text Hook (after connection accepted)</strong>
+        </div>
+        <div class="tl-body">
+          <p><strong>Message:</strong> Hey Neal, saw your post about not rushing to land the plane before you have the full picture. Had an idea for turning that window-timing pressure into something that attracts more club data teams building their June shortlists. Sending a quick video shortly.</p>
+          <p style="font-size:12px; color:#666; margin-top:8px;">Recipient: Neal Stanborough · Send after connection accepted · No video link yet — hook only · Wait 24–48 hours then send Day 1 video</p>
+          <p style="font-size:12px; color:#888; font-style:italic; margin-top:4px;">Intrigue gap — no ask, no link, no CTA. Just the hook.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 1 — LINKEDIN DM VIDEO DROP -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 1</span>
+          <span style="background:#0a66c2; color:#fff; padding:2px 8px; border-radius:4px; font-size:11px; margin-left:8px; font-weight:600;">LinkedIn DM</span>
+          <strong>LinkedIn DM — Video Drop (24–48 hrs after text hook)</strong>
+        </div>
+        <div class="tl-body">
+          <p>Here it is — LINKEDIN_DM_VSL_URL</p>
+          <p>And the page: https://jeanmundabi-max.github.io/transferroom-outreach-package/landing-page-club-data-analytics.html</p>
+          <p>Happy to walk through how we'd drive the right traffic to this specifically.</p>
+          <p style="font-size:12px; color:#666; margin-top:8px;">He is expecting this — send whether or not he replied to Day 0 · Replace LINKEDIN_DM_VSL_URL with Loom/Tella link before sending</p>
+          <p style="font-size:12px; color:#888; font-style:italic; margin-top:4px;">He is expecting this — send even if no reply to Day 0.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 0 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 0</span>
+          <span class="tl-ch-badge ch-email">Email</span>
+          <span class="tl-action">Email 1 — Trigger angle: "Data products, summer window."</span>
+          <span class="tl-pss">PSS 87</span>
+          <span class="tl-toggle">▼</span>
+        </div>
+        <div class="tl-body">
+          <div class="email-box">
+            <div class="subj-line">Subject: Data products, summer window.</div>
+            <p>Neal,</p>
+            <p>TransferRoom built 800 club relationships through the conference circuit. The analytics function at clubs — Head of Analysis, Data Scientist — is not at Soccerex.</p>
+            <p>The risk is that Championship and Bundesliga 2 clubs confirming their data stack in May choose a tool before your team enters those conversations.</p>
+            <p>We help you reach club analysts building their shortlist before the summer window.</p>
+            <p>A few data product signings can mean GBP 30,000 to 50,000 in net new ARR from clubs the conference circuit does not reach.</p>
+            <p>We handle the account research, outreach, and qualification so your team stays focused on commercial conversations.</p>
+            <p>I've mapped 28 clubs with confirmed buying signals — new ownership, promoted sides, recent analyst hires.</p>
+            <p>I can send the list over.</p>
+            <p>Jean</p>
+          </div>
+          <div class="tl-note">Trigger angle. Delivery CTA (leads.md confirmed — 28 entries). Make money category. Word count: 107. PSS: 87/100. QA gates: all PASS.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-spacer"></div>
+
+    <!-- DAY 1 -->
+    <div class="tl-entry">
+      <div class="tl-dot li"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 1</span>
+          <span class="tl-ch-badge ch-li">LinkedIn</span>
+          <span class="tl-action">Connection request — findings on where club analysts make decisions</span>
+          <span class="tl-toggle">▼</span>
+        </div>
+        <div class="tl-body">
+          <div class="li-msg-box">"Neal — I've been looking at how TransferRoom approaches the data product market. Have some findings on where club analysts are making their tool decisions. Happy to share."</div>
+          <div class="tl-note">Sent to linkedin.com/in/neal-stanborough-58392025. Coordinated with Email 1 — runs the next day to give the email time to land. Note does not reference the email directly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-spacer"></div>
+
+    <!-- DAY 3 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 3</span>
+          <span class="tl-ch-badge ch-email">Email</span>
+          <span class="tl-action">Email 2 — Friction angle: "Before the shortlist forms."</span>
+          <span class="tl-pss">PSS 85</span>
+          <span class="tl-toggle">▼</span>
+        </div>
+        <div class="tl-body">
+          <div class="email-box">
+            <div class="subj-line">Subject: Before the shortlist forms.</div>
+            <p>Neal,</p>
+            <p>Without a dedicated channel reaching club analysts, TransferRoom's data products surface only when clubs already know to look.</p>
+            <p>Directors of Football shortlist tools through Soccerex and World Football Summit. Heads of Analysis — the actual decision-makers for data products — are not at those events. They hear about tools through peer networks and direct outreach.</p>
+            <p>Without that channel, you win only the clubs that already found you.</p>
+            <p>We identify club data teams in a buying window and get TransferRoom into those conversations before the shortlist consolidates.</p>
+            <p>We handle the research, outreach, and qualification so your team enters each evaluation early.</p>
+            <p>Worth showing you how we'd approach this for TransferRoom?</p>
+            <p>Jean</p>
+          </div>
+          <div class="tl-note">Friction angle — different from Email 1 Trigger angle (per sequence angle rules). Stop losing category. Question CTA (no list promised in this email — different from Email 1 Delivery CTA). Word count: 97. PSS: 85/100.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-spacer"></div>
+
+    <!-- DAY 5 -->
+    <div class="tl-entry">
+      <div class="tl-dot li"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 5</span>
+          <span class="tl-ch-badge ch-li">LinkedIn</span>
+          <span class="tl-action">Follow-up DM — 28-club list preview with specific club names</span>
+          <span class="tl-toggle">▼</span>
+        </div>
+        <div class="tl-body">
+          <div class="li-msg-box">"Following up — the 28-club list I mentioned includes several Bundesliga 2 and Championship clubs with new ownership and confirmed analyst hires this year. All in the buying window before the summer. Happy to send over if useful."</div>
+          <div class="tl-note">Sent to accepted LinkedIn connections only. References the 28-club list from Email 1. Adds specificity — Bundesliga 2 and Championship clubs. Low-friction ask.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-spacer"></div>
+
+    <!-- DAY 10 -->
+    <div class="tl-entry">
+      <div class="tl-dot li"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 10</span>
+          <span class="tl-ch-badge ch-li">LinkedIn</span>
+          <span class="tl-action">Breakup message — specific club names, no obligation</span>
+          <span class="tl-toggle">▼</span>
+        </div>
+        <div class="tl-body">
+          <div class="li-msg-box">"Last note from me — if the timing is wrong, no problem. I'll leave the list here if it becomes useful before the next window: the Palermo FC and Juve Stabia contacts alone might be worth a look given their City Football Group and Brera Holdings ownership."</div>
+          <div class="tl-note">Final LinkedIn touch. Drops specific club names (Palermo/CFG, Juve Stabia/Brera) to add concrete value without asking for anything. Low-friction breakup — leaves the door open for the next window.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-spacer"></div>
+
+    <!-- DAY 21 -->
+    <div class="tl-entry">
+      <div class="tl-dot nurture"></div>
+      <div class="tl-card">
+        <div class="tl-header" onclick="toggle(this)">
+          <span class="tl-day">Day 21</span>
+          <span class="tl-ch-badge ch-nurture">Nurture</span>
+          <span class="tl-action">HubSpot 20-week nurture sequence enters — value-only, no pitches</span>
+          <span class="tl-toggle">▼</span>
+        </div>
+        <div class="tl-body">
+          <div class="tl-note" style="font-size:14px;color:var(--text-muted);">All non-converted contacts enter a 20-week email nurture sequence. Pure value delivery — market intelligence, club ownership updates, analytics buyer trend data. No pitches. No "just checking in." The sequence keeps TransferRoom's name visible to Neal's inbox over the next 5 months. When the next buying trigger hits (new ownership announcement, analyst hire, another window approaching), MDB is already in his mind.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>See the full sequence in action</h2>
+    <p>15 minutes. Jean walks through the 28-club list, the email angles, and how this sequence reaches the analytics buyers TransferRoom's conference circuit does not.</p>
+    <a href="https://cal.com/jean-m-8f4kbr/15min" target="_blank" class="btn">Book 15 Minutes</a>
+  </div>
+
+  <div style="margin-top:32px;font-size:12px;color:var(--text-dim);text-align:center;"><em>Strategy and GTM research by Jean Mundabi Fala, MDB Growth Capital — May 2026</em></div>
+</div>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

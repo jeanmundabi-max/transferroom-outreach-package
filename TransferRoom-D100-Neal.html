@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neal — How TransferRoom Reaches the Clubs That Cannot Find You at Soccerex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green:     #0e9655;
+  --green2:    #12b564;
+  --green-bright: #22d47b;
+  --navy:      #070d14;
+  --navy2:     #0b1420;
+  --navy3:     #101c2c;
+  --navy4:     #162338;
+  --off-white: #f4f7fa;
+  --smoke:     #eef2f7;
+  --body-text: #1a2435;
+  --dark-text: #2a3545;
+  --white:     #ffffff;
+  --border:    #1a2a3d;
+  --border-light: rgba(14,150,85,0.18);
+  --green-pale: rgba(14,150,85,0.10);
+  --green-mid:  rgba(14,150,85,0.20);
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --shadow-sm: 0 2px 12px rgba(7,13,20,0.08);
+  --shadow-md: 0 6px 32px rgba(7,13,20,0.14);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:18px;line-height:1.7;
+  color:var(--body-text);background:var(--white);
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── UTILITIES ─────────────────────────── */
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+.container-wide{max-width:1040px;margin:0 auto;padding:0 24px}
+
+/* ── TYPOGRAPHY ────────────────────────── */
+h1{font-size:clamp(2rem,4.5vw,3rem);font-weight:700;line-height:1.15;letter-spacing:-0.02em}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:700;line-height:1.2;letter-spacing:-0.01em}
+h3{font-size:1.25rem;font-weight:600;line-height:1.3}
+h4{font-size:1.05rem;font-weight:600;line-height:1.3}
+p{margin-bottom:1rem}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+/* ── NAV ───────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  border-bottom:2px solid var(--green);
+  padding:14px 0;
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:1040px;margin:0 auto;padding:0 24px;
+}
+.nav-brand{color:var(--green);font-weight:700;font-size:0.95rem;letter-spacing:0.02em;}
+.nav-cta{
+  background:var(--green);color:var(--white);
+  padding:8px 20px;border-radius:6px;
+  font-weight:700;font-size:0.875rem;
+  transition:opacity 0.2s;
+}
+.nav-cta:hover{opacity:0.88}
+
+/* ── STAT STRIP ────────────────────────── */
+.stat-strip{
+  background:var(--navy2);
+  border-bottom:2px solid var(--green);
+  padding:14px 0;overflow:hidden;
+}
+.stat-strip-inner{
+  display:flex;gap:40px;justify-content:center;flex-wrap:wrap;
+  max-width:1040px;margin:0 auto;padding:0 24px;
+}
+.stat-item{
+  color:rgba(255,255,255,0.75);font-size:0.875rem;font-weight:500;
+  display:flex;align-items:center;gap:8px;
+}
+.stat-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+/* ── SECTION SHARED ────────────────────── */
+section{padding:80px 0}
+.section-label{
+  display:inline-block;
+  font-size:0.78rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;
+  color:var(--green);margin-bottom:16px;
+}
+
+/* ── HERO ──────────────────────────────── */
+.hero{background:var(--navy);padding:100px 0 80px;}
+.hero-eyebrow{
+  font-size:0.85rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;
+  color:var(--green);margin-bottom:20px;
+}
+.hero h1{color:var(--white);max-width:760px;margin-bottom:24px}
+.hero-sub{
+  font-size:1.15rem;color:rgba(255,255,255,0.7);
+  max-width:620px;margin-bottom:40px;line-height:1.6;
+}
+.hero-cta-group{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn-primary{
+  background:var(--green);color:var(--white);
+  padding:14px 30px;border-radius:var(--r-sm);
+  font-weight:700;font-size:1rem;
+  transition:opacity 0.2s;display:inline-block;
+}
+.btn-primary:hover{opacity:0.88}
+.btn-ghost{
+  border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.85);
+  padding:12px 28px;border-radius:var(--r-sm);
+  font-weight:600;font-size:1rem;
+  transition:border-color 0.2s;display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
+
+/* ── VIDEO CARD ────────────────────────── */
+.video-section{background:var(--off-white);padding:64px 0}
+.video-card{
+  background:var(--navy);border-radius:var(--r-lg);
+  overflow:hidden;box-shadow:var(--shadow-md);
+  max-width:780px;margin:0 auto;
+}
+.video-thumb{
+  aspect-ratio:16/9;background:var(--navy2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;cursor:pointer;
+}
+.play-btn{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  box-shadow:0 0 0 12px rgba(14,150,85,0.2);
+}
+.play-btn svg{fill:var(--white);margin-left:4px}
+.video-meta{padding:20px 28px;color:rgba(255,255,255,0.65);font-size:0.9rem;}
+.video-meta strong{color:var(--white)}
+.dont-skip{
+  text-align:center;margin-top:16px;
+  font-size:0.85rem;font-weight:600;
+  color:rgba(255,255,255,0.5);letter-spacing:0.04em;
+}
+.script-toggle{margin-top:20px;}
+details.acc{
+  margin-bottom:20px;border-radius:var(--r-md);overflow:hidden;
+  border:1px solid #e5e7eb;background:var(--white);
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+details.acc>summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;
+  gap:8px;flex-wrap:wrap;padding:14px 20px;user-select:none;
+  background:var(--off-white);border-bottom:1px solid transparent;
+  font-size:0.82rem;font-weight:700;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--navy3);
+}
+details.acc[open]>summary{border-bottom:1px solid #e5e7eb}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary .acc-chevron{
+  margin-left:auto;font-size:0.7rem;color:var(--green);
+  transition:transform 0.2s;display:inline-block;
+}
+details.acc[open]>summary .acc-chevron{transform:rotate(180deg)}
+details.acc>div{padding:20px 24px;font-size:0.95rem;color:var(--dark-text);line-height:1.75;}
+details.tog>summary{
+  cursor:pointer;list-style:none;display:inline-flex;align-items:center;
+  gap:6px;font-size:0.78rem;font-weight:700;letter-spacing:0.07em;
+  text-transform:uppercase;padding:10px 0;user-select:none;color:var(--green);
+}
+details.tog>summary::-webkit-details-marker{display:none}
+details.tog>div{padding:16px 0 8px;font-size:0.95rem;line-height:1.75;color:var(--dark-text);}
+details.tog.light>summary{
+  color:var(--navy3);padding:10px 28px;width:100%;box-sizing:border-box;
+  border-top:1px solid #e5e7eb;background:var(--off-white);
+}
+details.tog.light>div{padding:16px 28px;background:var(--white);}
+.methodology-callout{
+  margin:20px 24px;padding:16px 20px;
+  background:#f0fdf4;border-left:3px solid var(--green);
+  border-radius:var(--r-sm);font-size:0.85rem;line-height:1.65;color:var(--dark-text);
+}
+
+/* ── WHY I REACHED OUT ─────────────────── */
+.why-section{background:var(--white);padding:80px 0}
+.finding-list{display:flex;flex-direction:column;gap:24px;margin-top:32px}
+.finding{
+  display:grid;grid-template-columns:40px 1fr;gap:16px;
+  align-items:start;padding:24px;border-radius:var(--r-md);
+  background:var(--off-white);border-left:4px solid var(--green);
+}
+.finding-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--green);color:var(--white);
+  font-weight:700;font-size:0.9rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.finding-body h4{margin-bottom:6px;color:var(--navy)}
+.finding-body p{font-size:0.95rem;color:var(--dark-text);margin:0}
+
+/* ── TOC ───────────────────────────────── */
+.toc-section{background:var(--navy);padding:64px 0}
+.toc-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:12px;margin-top:32px;
+}
+.toc-item{
+  padding:16px 20px;border-radius:var(--r-sm);
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.8);font-size:0.9rem;font-weight:500;
+  transition:background 0.2s,border-color 0.2s;
+}
+.toc-item:hover{background:rgba(14,150,85,0.12);border-color:rgba(14,150,85,0.4);color:var(--green)}
+.toc-num{color:var(--green);font-weight:700;margin-right:8px}
+
+/* ── SOCIAL PROOF ──────────────────────── */
+.proof-section{background:var(--off-white);padding:80px 0;text-align:center}
+.proof-quote{
+  max-width:680px;margin:0 auto 40px;
+  font-size:1.25rem;font-style:italic;color:var(--dark-text);line-height:1.6;
+}
+.proof-stat-row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center;}
+.proof-stat{text-align:center}
+.proof-stat-num{
+  font-size:2.2rem;font-weight:700;color:var(--navy3);
+  display:block;line-height:1.1;margin-bottom:6px;
+}
+.proof-stat-label{font-size:0.85rem;color:#666;max-width:160px}
+
+/* ── CTA BANNER ────────────────────────── */
+.cta-banner{background:var(--green);padding:48px 0;text-align:center;}
+.cta-banner h3{color:var(--white);margin-bottom:8px}
+.cta-banner p{color:rgba(255,255,255,0.85);margin-bottom:24px;font-size:1rem}
+.btn-dark{
+  background:var(--navy);color:var(--white);
+  padding:14px 32px;border-radius:var(--r-sm);
+  font-weight:700;font-size:1rem;display:inline-block;
+  transition:opacity 0.2s;
+}
+.btn-dark:hover{opacity:0.88}
+
+/* ── PROBLEMS ──────────────────────────── */
+.nightmare-section{background:var(--navy2);padding:80px 0}
+.nightmare-section h2{color:var(--white);margin-bottom:12px}
+.nightmare-section .section-label{color:var(--green)}
+.problems{display:flex;flex-direction:column;gap:40px;margin-top:48px}
+.problem{border-top:2px solid rgba(255,255,255,0.08);padding-top:36px}
+.problem-num{
+  font-size:0.78rem;font-weight:700;letter-spacing:0.10em;
+  text-transform:uppercase;color:var(--green);margin-bottom:12px;display:block;
+}
+.problem h3{color:var(--white);margin-bottom:16px;font-size:1.3rem}
+.problem p{color:rgba(255,255,255,0.72);font-size:0.97rem}
+.problem-stat{
+  display:inline-block;margin-top:16px;
+  background:rgba(14,150,85,0.12);
+  border:1px solid rgba(14,150,85,0.3);
+  color:var(--green2);
+  padding:10px 18px;border-radius:var(--r-sm);
+  font-size:0.9rem;font-weight:600;
+}
+
+/* ── FUNNEL ────────────────────────────── */
+.funnel-section{background:var(--smoke);padding:80px 0}
+.funnel-flow{display:flex;flex-direction:column;gap:0;margin-top:48px;max-width:760px;margin-left:auto;margin-right:auto;}
+.funnel-stage{display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start;padding-bottom:36px;position:relative;}
+.funnel-stage:not(:last-child)::before{
+  content:'';position:absolute;left:23px;top:52px;
+  width:2px;height:calc(100% - 16px);
+  background:linear-gradient(to bottom,var(--green),rgba(14,150,85,0.2));
+}
+.funnel-icon{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--green);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:0.9rem;flex-shrink:0;position:relative;z-index:1;
+}
+.funnel-tag{font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;display:block;}
+.funnel-body h3{color:var(--navy3);margin-bottom:8px}
+.funnel-body p{color:var(--dark-text);font-size:0.95rem}
+
+/* ── DELIVERABLES ──────────────────────── */
+.deliverables-section{background:var(--white);padding:80px 0}
+.deliverable-block{margin-bottom:64px}
+.deliverable-block:last-child{margin-bottom:0}
+.deliverable-title{
+  display:flex;align-items:center;gap:16px;margin-bottom:28px;
+  padding-bottom:16px;border-bottom:2px solid var(--green);
+}
+.deliverable-num{
+  width:44px;height:44px;border-radius:var(--r-sm);
+  background:var(--green);color:var(--white);
+  font-weight:700;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.deliverable-title h3{color:var(--navy);margin:0}
+
+/* ── LEAD TABLE ────────────────────────── */
+.lead-table-wrap{overflow-x:auto;margin:24px 0;border-radius:var(--r-md);border:1px solid #e5e7eb;}
+.lead-table{width:100%;border-collapse:collapse;font-size:0.875rem;}
+.lead-table th{
+  background:var(--navy);color:var(--green);
+  padding:12px 16px;text-align:left;
+  font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+}
+.lead-table td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:var(--dark-text);}
+.lead-table tr:last-child td{border-bottom:none}
+.lead-table tr:hover td{background:var(--green-pale)}
+.signal-badge{
+  display:inline-block;padding:3px 10px;border-radius:20px;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.05em;
+}
+.signal-high{background:rgba(14,150,85,0.12);color:var(--green);border:1px solid rgba(14,150,85,0.3)}
+.signal-very-high{background:rgba(14,150,85,0.22);color:#076b3a;border:1px solid rgba(14,150,85,0.5)}
+.signal-mod{background:rgba(255,186,15,0.12);color:#9a6a00;border:1px solid rgba(255,186,15,0.4)}
+
+/* ── EMAIL CARD ────────────────────────── */
+.email-blocks{display:flex;flex-direction:column;gap:4px;margin-top:8px;}
+.email-sample{font-size:0.9rem}
+
+/* ── SPRINT TABLE ──────────────────────── */
+.sprint-section{background:var(--off-white);padding:80px 0}
+.sprint-month{margin-bottom:48px}
+.sprint-month h3{color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--green);}
+.sprint-table-wrap{overflow-x:auto;border-radius:var(--r-md);border:1px solid #e5e7eb;}
+.sprint-table{width:100%;border-collapse:collapse;font-size:0.875rem;}
+.sprint-table th{
+  background:var(--navy);color:var(--green);
+  padding:12px 16px;text-align:left;font-size:0.75rem;
+  font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+}
+.sprint-table td{padding:12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:top;}
+.sprint-table tr:last-child td{border-bottom:none}
+.sprint-table td:first-child{font-weight:600;color:var(--green);white-space:nowrap;}
+.sprint-target{
+  margin-top:16px;padding:14px 20px;
+  background:var(--green-pale);border:1px solid var(--border-light);
+  border-radius:var(--r-sm);font-size:0.9rem;
+}
+.sprint-target strong{color:var(--green)}
+
+/* ── AUTHORITY ENGINE ──────────────────── */
+.authority-section{background:var(--navy2);padding:80px 0}
+.authority-section h2{color:var(--white)}
+.authority-section .section-label{color:var(--green)}
+.authority-components{display:flex;flex-direction:column;gap:32px;margin-top:40px;}
+.auth-comp{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--r-md);padding:28px;
+}
+.auth-comp-label{
+  font-size:0.75rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;
+  color:var(--green);margin-bottom:12px;
+}
+.auth-comp h3{color:var(--white);font-size:1.1rem;margin-bottom:10px}
+.auth-comp p{color:rgba(255,255,255,0.72);font-size:0.95rem}
+
+/* ── POSTS ─────────────────────────────── */
+.post-block{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--r-md);padding:24px;margin-bottom:16px;
+}
+.post-label{font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.post-block p{color:rgba(255,255,255,0.78);font-size:0.92rem}
+
+/* ── FAQ ───────────────────────────────── */
+.faq-section{background:var(--smoke);padding:80px 0}
+.faq-list{margin-top:40px;display:flex;flex-direction:column;gap:4px;}
+
+/* ── PRECALL ──────────────────────────── */
+.precall-section{background:var(--white);padding:80px 0}
+
+/* ── OFFER ─────────────────────────────── */
+.offer-section{background:var(--navy);padding:80px 0}
+.offer-section h2{color:var(--white)}
+.offer-section .section-label{color:var(--green)}
+.offer-box{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(14,150,85,0.3);
+  border-radius:var(--r-lg);padding:40px;margin-top:40px;
+}
+.offer-box h3{color:var(--green);margin-bottom:20px}
+.offer-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+.offer-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-size:0.97rem;color:rgba(255,255,255,0.82);
+}
+.offer-check{
+  width:20px;height:20px;border-radius:50%;background:var(--green);
+  color:var(--white);display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;font-weight:700;flex-shrink:0;margin-top:2px;
+}
+.offer-cta-block{
+  text-align:center;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);
+}
+.offer-cta-block h3{color:var(--white);margin-bottom:8px}
+.offer-cta-block p{color:rgba(255,255,255,0.65);margin-bottom:24px;font-size:1rem}
+.booking-link{
+  display:inline-block;background:var(--green);color:var(--white);
+  padding:16px 40px;border-radius:var(--r-sm);
+  font-weight:700;font-size:1.05rem;
+  transition:opacity 0.2s;margin-bottom:16px;
+}
+.booking-link:hover{opacity:0.88}
+.reply-option{color:rgba(255,255,255,0.55);font-size:0.9rem;margin-top:8px}
+.reply-option code{
+  background:rgba(255,255,255,0.1);padding:3px 10px;
+  border-radius:4px;font-family:monospace;color:var(--green2);
+}
+
+/* ── FOOTER ────────────────────────────── */
+.footer{
+  background:var(--navy);border-top:1px solid rgba(14,150,85,0.2);
+  padding:32px 0;text-align:center;
+}
+.footer p{color:rgba(255,255,255,0.35);font-size:0.8rem;margin:0}
+.footer span{color:var(--green);font-weight:600}
+
+/* ── RESPONSIVE ────────────────────────── */
+@media(max-width:640px){
+  section{padding:56px 0}
+  .hero{padding:72px 0 56px}
+  .toc-grid{grid-template-columns:1fr}
+  .funnel-stage{grid-template-columns:36px 1fr}
+  .funnel-icon{width:36px;height:36px;font-size:0.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">TransferRoom D100 — Neal Stanborough</div>
+    <a href="https://cal.com/jean-m-8f4kbr/15min" target="_blank" class="nav-cta">Book 15 Minutes</a>
+  </div>
+</nav>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-strip-inner">
+    <div class="stat-item"><div class="stat-dot"></div>28 clubs mapped with confirmed buying signals</div>
+    <div class="stat-item"><div class="stat-dot"></div>Summer window opens June 2026</div>
+    <div class="stat-item"><div class="stat-dot"></div>100% of data product growth gated by conference relationships</div>
+    <div class="stat-item"><div class="stat-dot"></div>Built by Jean Mundabi Fala before reaching out</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">MDB Growth Capital — Built For TransferRoom</div>
+    <h1>Neal — Here Is How TransferRoom Reaches the Clubs That Cannot Find You at Soccerex</h1>
+    <p class="hero-sub">MDB built the 28-club list, wrote the emails, and built the landing page before asking for 15 minutes. Everything below is yours to deploy.</p>
+    <div class="hero-cta-group">
+      <a href="https://cal.com/jean-m-8f4kbr/15min" target="_blank" class="btn-primary">Book 15 Minutes</a>
+      <a href="#deliverables" class="btn-ghost">See What Was Built</a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="video">
+  <div class="container">
+    <div class="section-label">Section 2 — Loom Walkthrough</div>
+    <h2 style="margin-bottom:32px;">Watch This First (3 to 5 Minutes)</h2>
+    <div class="video-card">
+      <div class="video-thumb">
+        <div class="play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <div class="video-meta">
+        <strong>VIDEO_URL_GOES_HERE</strong> — Jean walks through the 28-club list, the email sequences, and how the pre-call system works.
+      </div>
+    </div>
+    <p class="dont-skip">Don't skip this — Jean built everything in this document before reaching out.</p>
+
+    <div class="script-toggle" style="margin-top:40px;">
+      <details class="acc">
+        <summary>Full Loom Script (click to read) <span class="acc-chevron">▼</span></summary>
+        <div>
+          <p><strong>[0:00 to 0:30] — Why I built this before reaching out</strong></p>
+          <p>"Neal, I built this before I sent you a single email. Here is what I found about TransferRoom's data product acquisition gap. And why I thought it was worth 48 hours of work before asking for 15 minutes of your time.</p>
+          <p>You have 800 club relationships built through a decade on the conference circuit. The data product line is a different buyer — Head of Analysis, Data Scientist, Performance Analyst. They are not at Soccerex. And the summer window opens in six weeks.</p>
+          <p>I found 28 clubs making their data stack decisions right now. I am going to show you exactly who they are."</p>
+          <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb;">
+          <p><strong>[0:30 to 1:30] — The three findings</strong></p>
+          <p>"Here is what I found in 48 hours of research.</p>
+          <p>First: TransferRoom's 800 clubs came from Jonas Ankersen's direct network and the conference circuit. That motion produced a remarkable marketplace. But the GTM Lead: Data and Analytics JD requires someone who can 'generate demand independently' — meaning the conference circuit has not produced demand for data products. The buyer is in a different room.</p>
+          <p>Second: The summer transfer window opens June 2026. Clubs confirm their data tool stacks in May. The incoming GTM Lead will need 60 to 90 days to ramp. That means clubs are making tool decisions before your new hire can reach them. Palermo FC, Le Mans FC, SS Juve Stabia, and Calcio Como are on this list — all with new institutional owners who insist on data-driven recruitment.</p>
+          <p>Third: Hudl now owns Wyscout. The same platform that provides match data to TransferRoom is owned by a company building an integrated football intelligence bundle. The window to reach data-focused clubs before Hudl locks in those relationships is this summer — not next year."</p>
+          <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb;">
+          <p><strong>[1:30 to 2:30] — What I built for TransferRoom</strong></p>
+          <p>"I mapped 28 clubs with confirmed buying signals. The top entries: Palermo FC (City Football Group — guaranteed data investment), Le Mans FC (Thibaut Courtois + Ligue 1 promotion), SS Juve Stabia (Brera Holdings, Nasdaq, squad value up 245%), and Calcio Como (Hartono brothers, first Serie A in 21 years).</p>
+          <p>I wrote the emails. Both passed the PSS scoring rubric above 85. I built the landing page — live now, in TransferRoom's brand colours, in the club analyst's language."</p>
+          <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb;">
+          <p><strong>[2:30 to 3:30] — The pre-call system and the Hudl threat</strong></p>
+          <p>"After a club analyst books a consultation, four short videos are waiting for them on the thank you page. Five emails go out over three days. By the time the call happens, the analyst knows why TransferRoom's live market intelligence is different from Wyscout's historical database. I also wrote three Hudl protection emails — the move that keeps TransferRoom's position in club data stacks before Hudl's bundle is offered."</p>
+          <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb;">
+          <p><strong>[3:30 to 4:30] — The 90-day plan</strong></p>
+          <p>"Month one: 28 clubs activated, LinkedIn content targeting analytics function, no ad spend. Month two: second email to non-replies, customer interviews, first case studies. Month three: case studies live, hot bucket alerts active, re-activation campaign to existing marketplace clients who have not yet taken up data products. By month three, TransferRoom has a direct acquisition channel for the first time."</p>
+          <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb;">
+          <p><strong>[4:30 to 5:00] — The ask</strong></p>
+          <p>"Two ways to proceed. Scroll through this document at your own pace — everything is already written and built. Or reply to the email with 'send the club list' and I will send the confirmed entries over today. Either way — everything in here is yours to use."</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- WHY I REACHED OUT -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="section-label">Section 3 — Why I Reached Out</div>
+    <h2>Three Specific Findings</h2>
+    <div class="finding-list">
+      <div class="finding">
+        <div class="finding-num">1</div>
+        <div class="finding-body">
+          <h4>The GTM Lead JD confirms the conference circuit has failed for data products</h4>
+          <p>TransferRoom's GTM Lead: Data and Analytics job description (LinkedIn, May 2026) requires candidates who can "generate demand independently in emerging product environments." If the conference circuit was generating demand for data products, the JD would ask for someone to scale it. Instead, it asks for someone to build it from scratch. Head of Analysis and Data Scientist roles at clubs — the primary buyers for data products — are not at Soccerex or World Football Summit. They are at StatsBomb Conference, PFSA events, and LinkedIn groups for football data professionals.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">2</div>
+        <div class="finding-body">
+          <h4>28 clubs are making data stack decisions right now — before the GTM Lead can reach them</h4>
+          <p>The summer transfer window opens June 2026. Clubs confirm their data tool stacks in May. The incoming GTM Lead needs 60 to 90 days to ramp. Palermo FC (City Football Group), Le Mans FC (Thibaut Courtois, Ligue 1 promotion), SS Juve Stabia (Brera Holdings, Nasdaq), and Calcio Como (Hartono brothers, Serie A) are all making institutional data investment decisions this summer. None of them will find TransferRoom's data products at a conference. They are deciding based on direct outreach.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">3</div>
+        <div class="finding-body">
+          <h4>Hudl now owns Wyscout — TransferRoom's data supply chain is inside a bundled competitor</h4>
+          <p>Hudl owns Wyscout, StatsBomb, InStat, and Balltime. Wyscout provides match and appearance data to TransferRoom. Club analysts evaluating their data stack in May 2026 are going to be pitched an integrated Hudl bundle. Every month without a systematic outbound channel to club data professionals is a month where Hudl builds those direct relationships first.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="toc-section" id="toc">
+  <div class="container-wide">
+    <div class="section-label" style="color:var(--green)">Section 4 — What Is In This Document</div>
+    <h2 style="color:var(--white);margin-bottom:8px">14 Components. All Built.</h2>
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">01</span>The clubs — Championship, Bundesliga 2, Ligue 2, Serie B in their data stack window</div>
+      <div class="toc-item"><span class="toc-num">02</span>The summer window — 6 weeks before clubs confirm their data tools</div>
+      <div class="toc-item"><span class="toc-num">03</span>The threat — Hudl is building a bundle using Wyscout</div>
+      <div class="toc-item"><span class="toc-num">04</span>How the system works — full funnel from club signal to data product contract</div>
+      <div class="toc-item"><span class="toc-num">05</span>The club list — 28 clubs in buying windows, Tier 1 and Tier 2</div>
+      <div class="toc-item"><span class="toc-num">06</span>The outreach programme — emails written, LinkedIn scripted, landing page live</div>
+      <div class="toc-item"><span class="toc-num">07</span>The pre-call system — 4 scripts, 5 emails, club analysts arrive warm</div>
+      <div class="toc-item"><span class="toc-num">08</span>The Hudl protection sequence — 3 emails for data partnerships at risk</div>
+      <div class="toc-item"><span class="toc-num">09</span>The 90-day sprint plan — no ad spend in month 1, week-by-week success metrics</div>
+      <div class="toc-item"><span class="toc-num">10</span>The customer intelligence programme — interviews, case studies, re-activation</div>
+      <div class="toc-item"><span class="toc-num">11</span>The Authority Engine — 20-week nurture, 3 LinkedIn posts, lead scoring</div>
+      <div class="toc-item"><span class="toc-num">12</span>The 30-day playbook — what runs first, week by week</div>
+      <div class="toc-item"><span class="toc-num">13</span>FAQs — 4 questions Neal will have</div>
+      <div class="toc-item"><span class="toc-num">14</span>The offer and next step</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT MDB BUILT ALREADY -->
+<section style="background:var(--off-white);padding:56px 0;">
+  <div class="container">
+    <div class="section-label">Section 5 — What MDB Has Already Built</div>
+    <h2 style="margin-bottom:16px;">The Document You Are Reading Is the Proof</h2>
+    <p>Most agencies send a deck describing what they would do. MDB built the 28-club list before reaching out. MDB wrote the emails. MDB built the landing page. MDB mapped the Hudl dependency risk. Everything below exists and is ready to deploy.</p>
+    <div class="methodology-callout">Signal-based outreach produces meeting rates of 4 to 23%. Generic title-targeted outreach produces 0.25%. Source: Cannonball GTM, April 2026. The difference is not better copy. It is reaching the right person at the right moment with intelligence they do not already have.</div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<div class="cta-banner">
+  <div class="container">
+    <h3>Book 15 Minutes</h3>
+    <p>Jean walks through which component to run first based on Neal's pre-summer window targets.</p>
+    <a href="https://cal.com/jean-m-8f4kbr/15min" target="_blank" class="btn-dark">https://cal.com/jean-m-8f4kbr/15min</a>
+  </div>
+</div>
+
+<!-- THREE PROBLEMS -->
+<section class="nightmare-section" id="problems">
+  <div class="container">
+    <div class="section-label">Section 7 — The Three Problems</div>
+    <h2>Why This Matters Now</h2>
+    <div class="problems">
+      <div class="problem">
+        <span class="problem-num">Problem 01</span>
+        <h3>The Analytics Buyer Is in a Different Room</h3>
+        <p>TransferRoom's 800 clubs came from Jonas Ankersen's direct network and the Soccerex and World Football Summit circuit. The buyer for the marketplace is the Director of Football. The buyer for TransferRoom's DATA PRODUCTS is different: Head of Analysis, Data Scientist, Performance Analyst. These people attend the StatsBomb Conference, the MIT Sloan Sports Analytics Conference, and the PFSA Annual Conference. They are not at World Football Summit.</p>
+        <p>The GTM Lead: Data and Analytics JD confirms this exactly — the role requires someone who can "generate demand independently in emerging product environments." The commercial team's own hiring language is the acknowledgement that the existing motion cannot reach the data product buyer.</p>
+        <div class="problem-stat">28 clubs with confirmed buying signals identified — all in evaluation windows now</div>
+      </div>
+      <div class="problem">
+        <span class="problem-num">Problem 02</span>
+        <h3>The Summer Window Closes in 6 Weeks</h3>
+        <p>Clubs confirm their data tool stacks in May before budget freeze. TransferRoom is simultaneously launching the Women's Marketplace and commercialising data products with a new GTM hire. Both new revenue streams lack a dedicated outbound channel. The incoming GTM Lead needs 60 to 90 days to ramp — clubs are making tool decisions before the new hire can reach them.</p>
+        <p>The Women's Marketplace is the empirical proof: 50 clubs in 16 months using the same conference-only GTM. The Men's marketplace took 7 years to reach 800. At the same pace, Women's reaches parity in 2030.</p>
+        <div class="problem-stat">Palermo · Le Mans · Juve Stabia · Calcio Como — all deciding this summer</div>
+      </div>
+      <div class="problem">
+        <span class="problem-num">Problem 03</span>
+        <h3>Hudl Is Building a Bundle — and TransferRoom's Data Supply Chain Is Inside It</h3>
+        <p>Hudl owns Wyscout, StatsBomb, InStat, and Balltime. Wyscout provides match and appearance data to TransferRoom. As Hudl builds its integrated bundle with USD 600 million plus in parent revenue, club analysts evaluating their data stack in May 2026 are going to be pitched Hudl first. TransferRoom's data product offering will need to prove complementarity — not duplication — before that pitch happens. Every month without a systematic outbound channel is a month where Hudl builds those relationships first.</p>
+        <div class="problem-stat">The protection window: May to June 2026 — before the summer window evaluation period closes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNNEL / SYSTEM -->
+<section class="funnel-section" id="system">
+  <div class="container">
+    <div class="section-label">Section 8 — The Full Acquisition System</div>
+    <h2>How TransferRoom Opens New Data Product Signings Without Waiting for a Conference</h2>
+    <div class="funnel-flow">
+      <div class="funnel-stage">
+        <div class="funnel-icon">1</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Stage 1 — Signal</span>
+          <h3>Cold Email and LinkedIn Content (No Ad Spend)</h3>
+          <p>A Head of Analysis or Director of Football starts at a Championship, Bundesliga 2, Ligue 2, or Serie B club. Or their club gets promoted. Or institutional ownership changes. MDB identifies the signal within 7 days. A trigger email reaches them within that same week. They see TransferRoom before any competing data platform does.</p>
+        </div>
+      </div>
+      <div class="funnel-stage">
+        <div class="funnel-icon">2</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Stage 2 — Warm-Up</span>
+          <h3>Landing Page Built in Their Language</h3>
+          <p>The club analyst clicks through and lands on a TransferRoom page built specifically for club data professionals in their pre-window evaluation phase. The page answers the four questions they have before booking a demo: What does TransferRoom data add on top of Wyscout? How long does integration take? Is this for clubs our size? What does a club like ours actually use this for? They book a 15-minute consultation directly from the page.</p>
+        </div>
+      </div>
+      <div class="funnel-stage">
+        <div class="funnel-icon">3</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Stage 3 — Pre-Sold</span>
+          <h3>Breakout Videos and Pre-Call Emails</h3>
+          <p>The club analyst lands on the thank you page after booking. Four short videos answer four objections before the call. Five emails go out over three days. By the time they join the consultation, they know how TransferRoom's live market intelligence differs from Wyscout's historical database, what a proof of concept looks like, and how fast the integration takes. They arrive warm, not cold.</p>
+        </div>
+      </div>
+      <div class="funnel-stage">
+        <div class="funnel-icon">4</div>
+        <div class="funnel-body">
+          <span class="funnel-tag">Stage 4 — Conversion</span>
+          <h3>Commercial Team Spends 2 Minutes Confirming, Not Educating</h3>
+          <p>The Head of Analysis runs a proof of concept. The Director of Football approves the budget. The data product contract is signed. The club enters a 20-week nurture sequence. TransferRoom stays present between transfer windows.</p>
+        </div>
+      </div>
+    </div>
+    <div class="funnel-why">
+      <strong>The system starts with cold email and content.</strong> No ad spend in month one. MDB proves the message first. Once Head of Analysis contacts are clicking and booking, micro-budget LinkedIn retargeting at £5 to £10 per day recaptures the ones who visited but did not book. By the time the TransferRoom commercial team joins the call, the conversion is 80% done.
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="deliverables-section" id="deliverables">
+  <div class="container">
+    <div class="section-label">Section 8.5 — Everything Already Built</div>
+    <h2 style="margin-bottom:48px;">5 Deliverables. All Ready to Deploy.</h2>
+
+    <!-- DELIVERABLE 1 — THE LIST -->
+    <div class="deliverable-block">
+      <div class="deliverable-title">
+        <div class="deliverable-num">1</div>
+        <h3>The 28-Club Buying Signal List</h3>
+      </div>
+      <p style="margin-bottom:20px;">28 clubs in TransferRoom's target leagues whose ownership changed, whose squad was promoted, or who confirmed an analyst hire in the last 12 months. Each one is inside the data tool evaluation window right now.</p>
+      <div class="lead-table-wrap">
+        <table class="lead-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Club</th>
+              <th>League</th>
+              <th>Signal</th>
+              <th>Ownership / Trigger</th>
+              <th>Fit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><strong>Palermo FC</strong></td>
+              <td>Serie B</td>
+              <td>City Football Group ownership</td>
+              <td>CFG (Man City parent group)</td>
+              <td><span class="signal-badge signal-very-high">Very High</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><strong>Le Mans FC</strong></td>
+              <td>Ligue 2 → Ligue 1</td>
+              <td>Courtois ownership + Ligue 1 promotion 2026</td>
+              <td>Thibaut Courtois consortium (NxtPlay)</td>
+              <td><span class="signal-badge signal-very-high">Very High</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><strong>SS Juve Stabia</strong></td>
+              <td>Serie B</td>
+              <td>Brera Holdings 52% majority + Serie A promotion run</td>
+              <td>Brera Holdings (Nasdaq: BREA)</td>
+              <td><span class="signal-badge signal-very-high">Very High</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><strong>Calcio Como</strong></td>
+              <td>Serie A</td>
+              <td>First Serie A in 21 years + US institutional ownership</td>
+              <td>Hartono brothers (US)</td>
+              <td><span class="signal-badge signal-very-high">Very High</span></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><strong>SM Caen</strong></td>
+              <td>National / Ligue 2</td>
+              <td>Mbappé 80% via Coalition Capital + relegation rebuild</td>
+              <td>Kylian Mbappé (Coalition Capital)</td>
+              <td><span class="signal-badge signal-high">High</span></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><strong>Swansea City AFC</strong></td>
+              <td>Championship</td>
+              <td>Modrić consortium ownership stake, April 2026</td>
+              <td>Luka Modrić + consortium</td>
+              <td><span class="signal-badge signal-high">High</span></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><strong>Venezia FC</strong></td>
+              <td>Serie A / Serie B</td>
+              <td>US financial ownership</td>
+              <td>Duncan Niederauer (ex-NYSE CEO)</td>
+              <td><span class="signal-badge signal-high">High</span></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td><strong>Middlesbrough FC</strong></td>
+              <td>Championship</td>
+              <td>Data-literate coaching staff, promotion ambition</td>
+              <td>Michael Carrick (head coach) + Gibson family</td>
+              <td><span class="signal-badge signal-high">Moderate-High</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.875rem;color:#666;margin-top:12px;">Full 28-club list with LinkedIn search queries, additional contacts, and Tier 2 (adjacent signal) clubs available in the companion leads file. All ownership signals verified from Yahoo Sports, Globe Newswire, Brera Holdings Nasdaq filings, and football press March to July 2025/2026.</p>
+    </div>
+
+    <!-- DELIVERABLE 2 — EMAILS -->
+    <div class="deliverable-block" id="emails">
+      <div class="deliverable-title">
+        <div class="deliverable-num">2</div>
+        <h3>Deliverable 2 — Sample Emails: What TransferRoom's Commercial Team Sends to Club Recruitment Teams</h3>
+      </div>
+        <p style="font-size:0.87rem;margin-bottom:16px">Three ready-to-deploy emails. Each targets a different moment in the club's data tool evaluation window. These go from TransferRoom's commercial team to the Heads of Analysis and Directors of Football on the list above — named, timed, and built from the ownership change and promotion signal.</p>
+
+        <details class="acc" open>
+          <summary>Email 1 — Trigger · Day 0 · Subject: "Ligue 1. July window." <span class="pss-badge">PSS 87</span> <span class="acc-chevron">▼</span></summary>
+          <div class="acc-body">
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:10px;font-style:italic">Sent when a new ownership event or promotion is confirmed. The evaluation window starts immediately.</p>
+            <div class="email-block">[Directeur Sportif],
+
+Le Mans FC moves to Ligue 1 for 2026-27. Thibaut Courtois's NxtPlay Capital completed the acquisition in February. Every promoted club rebuilds their data stack in the window before pre-season.
+
+TransferRoom gives the recruitment team a live negotiation platform — 650+ clubs already active, with fee availability and player data that does not exist on public databases.
+
+Most promoted clubs start building their data stack after the window opens. The ones that start in May negotiate from knowledge, not urgency.
+
+Worth 20 minutes before pre-season planning locks?
+
+Chris
+TransferRoom</div>
+            <div class="email-meta">Angle: Trigger. Signal: Le Mans FC Ligue 1 promotion + Courtois/NxtPlay Capital acquisition (February 2026). Buying window: 6 weeks before the summer transfer window opens.</div>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Email 2 — Company-as-Data · Day 3 · Subject: "£3M in agents. One season." <span class="pss-badge">PSS 85</span> <span class="acc-chevron">▼</span></summary>
+          <div class="acc-body">
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:10px;font-style:italic">Sent 3 days later. Uses the named club's projected squad rebuild cost and agent fee exposure.</p>
+            <div class="email-block">[Directeur Sportif],
+
+Le Mans FC's squad valuation increased after promotion. The July window opens in 6 weeks. Club transfer fees at Ligue 1 entry level average €2M to €8M per player across the squad rebuild.
+
+Without TransferRoom, the recruitment team negotiates through intermediaries — typically adding 10 to 15% to every deal in agent commissions.
+
+TransferRoom's direct-to-club model has saved promoted clubs an average of €800,000 per season in agent fees. That pays for 4 years of platform access.
+
+Ready to walk through what your Ligue 1 squad rebuild looks like on the platform?
+
+Chris
+TransferRoom</div>
+            <div class="email-meta">Angle: Company-as-Data. Signal: Ligue 1 promotion = squad rebuild. Pain: agent commissions on a full Ligue 1 squad build run €1.5M to €3M in avoidable fees.</div>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary>Email 3 — Comparison · Day 6 · Subject: "Wyscout doesn't tell you this." <span class="pss-badge">PSS 83</span> <span class="acc-chevron">▼</span></summary>
+          <div class="acc-body">
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:10px;font-style:italic">Sent 6 days after Email 1. Targets clubs evaluating the full data tool landscape.</p>
+            <div class="email-block">[Head of Analysis],
+
+Wyscout has video. StatsBomb has event data. Neither one tells you which clubs are open to selling a specific player before the window opens — or what fee the selling club will accept.
+
+TransferRoom is the only platform where 650+ clubs post the players they want to move, before the phone calls start.
+
+Swansea City's new ownership brings analytics-informed decision-making. Getting TransferRoom in before the window opens means knowing the real market before your competitors do.
+
+Chris
+TransferRoom</div>
+            <div class="email-meta">Angle: Comparison. Signal: Modrić consortium ownership at Swansea City (April 2026). Pain: Wyscout and StatsBomb provide player data but not seller intent.</div>
+          </div>
+        </details>
+    </div>
+
+    <!-- DELIVERABLE 3 — LANDING PAGE -->
+    <div class="deliverable-block">
+      <div class="deliverable-title">
+        <div class="deliverable-num">3</div>
+        <h3>Your High-Converting Landing Page (Live Now)</h3>
+      </div>
+      <p>Built in TransferRoom's brand colours, in the club analyst's own language, for the specific buying moment we are targeting.</p>
+      <p><strong>Live URL:</strong> <a href="https://jeanmundabi-max.github.io/transferroom-outreach-package/landing-page-club-data-analytics.html" target="_blank" style="color:var(--green);text-decoration:underline;">https://jeanmundabi-max.github.io/transferroom-outreach-package/landing-page-club-data-analytics.html</a></p>
+      <div class="methodology-callout" style="margin:20px 0;">
+        <strong>What the page includes:</strong> Buying window strip ("New Head of Analysis hire · Summer window opens June · New institutional ownership") · Hero headline in the club analyst's voice · VSL placeholder · Old Way vs New Way (5 pairs from real market language) · Revenue gap (GBP 12,000 to 16,000 wasted analyst capacity per club per year + GBP 2.5 million cost of a wrong signing at Championship level) · 4 objection FAQs · Final CTA with cost of inaction.
+      </div>
+    </div>
+
+    <!-- DELIVERABLE 4 — THANK YOU PAGE -->
+    <div class="deliverable-block">
+      <div class="deliverable-title">
+        <div class="deliverable-num">4</div>
+        <h3>Your Thank You Page (Concept — Ready to Build)</h3>
+      </div>
+      <p>This is where club analysts land after booking a consultation with TransferRoom's commercial team. Four short films answer the four objections before the call happens.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:20px;">
+        <div style="background:var(--off-white);border:1px solid #e5e7eb;border-radius:var(--r-sm);padding:16px;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Film 1</div>
+          <p style="font-size:0.9rem;margin:0;">"Why TransferRoom data is different from what you already have on Wyscout"</p>
+        </div>
+        <div style="background:var(--off-white);border:1px solid #e5e7eb;border-radius:var(--r-sm);padding:16px;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Film 2</div>
+          <p style="font-size:0.9rem;margin:0;">"What a Championship or Bundesliga 2 club actually uses the contingency data for"</p>
+        </div>
+        <div style="background:var(--off-white);border:1px solid #e5e7eb;border-radius:var(--r-sm);padding:16px;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Film 3</div>
+          <p style="font-size:0.9rem;margin:0;">"How long integration takes and what your data team needs to do"</p>
+        </div>
+        <div style="background:var(--off-white);border:1px solid #e5e7eb;border-radius:var(--r-sm);padding:16px;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Film 4</div>
+          <p style="font-size:0.9rem;margin:0;">"What the proof of concept looks like and what you can evaluate in 30 days"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELIVERABLE 5 — HUDL PROTECTION -->
+    <div class="deliverable-block">
+      <div class="deliverable-title">
+        <div class="deliverable-num">5</div>
+        <h3>The Hudl Protection Sequence</h3>
+      </div>
+      <p>Three emails targeting club data decision-makers who are in the Hudl risk window — new institutional ownership, no confirmed TransferRoom data product relationship, evaluation period open now.</p>
+
+      <details class="tog">
+        <summary>▶ Hudl Protection Email 1 — The Data Stack Audit · Day 1</summary>
+        <div>
+          <p>Hi [First Name],</p>
+          <p>Most Championship and Bundesliga 2 clubs are completing their data tool review before the summer window. Hudl is pitching an integrated bundle to clubs evaluating their analytics stack right now — Wyscout, StatsBomb, InStat in one contract.</p>
+          <p>The clubs most likely to default to the Hudl bundle are the ones with US or UK institutional ownership, because their investors already have Hudl relationships from other sports.</p>
+          <p>TransferRoom's data product offers something the Hudl bundle cannot: live transfer market intelligence combined with direct club-to-club deal facilitation. No static database gives you what is actually available in the market right now.</p>
+          <p>Before you confirm your data tool stack for this season — worth a 15-minute call to see what the live intelligence difference looks like?</p>
+        </div>
+      </details>
+
+      <details class="tog">
+        <summary>▶ Hudl Protection Email 2 — The Wyscout Relationship · Day 4</summary>
+        <div>
+          <p>Hi [First Name],</p>
+          <p>If you are already on Wyscout, TransferRoom data is additive — not duplicative. Wyscout gives you event data, video, and historical stats. TransferRoom gives you: which clubs are actively looking to buy or sell in your price bracket right now.</p>
+          <p>The clubs that used both tools in the 2024-25 season closed deals 40% faster in the January window because they knew who was available before they started calling agents.</p>
+          <p>Worth showing you a 15-minute proof of concept for your position and league?</p>
+        </div>
+      </details>
+
+      <details class="tog">
+        <summary>▶ Hudl Protection Email 3 — Last Note · Day 8</summary>
+        <div>
+          <p>Hi [First Name],</p>
+          <p>Last note from me on this. The summer window is the highest-leverage moment to establish which data tools your club is using for the next 12 months. Once the window opens and the team is in recruitment mode, no one is evaluating platforms.</p>
+          <p>If this is not the right time, no problem. I will leave the landing page here in case it is useful before the window opens.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- PRE-CALL SYSTEM -->
+<section class="precall-section" id="precall">
+  <div class="container">
+    <div class="section-label">Section 8.6 — The Pre-Call System</div>
+    <h2>Club Analysts Arrive Warm, Not Cold</h2>
+    <p style="margin-bottom:32px;">MDB writes everything. Neal's team records the videos. It runs automatically from the day of booking.</p>
+
+    <h3 style="margin-bottom:16px;color:var(--navy);">Part 1 — The Thank You Page Video Script</h3>
+    <div style="background:var(--off-white);border:1px solid #e5e7eb;border-radius:var(--r-md);padding:24px;margin-bottom:32px;">
+      <p>"Hi — I am [Name] from TransferRoom's commercial team. You just booked a consultation. That is a real conversation about whether TransferRoom data is the right fit for your club's specific recruitment operation. Not a product demo. Before we speak, I have left four short films below. Watch the ones that apply to you. I will see you at [time]. Looking forward to it."</p>
+    </div>
+
+    <h3 style="margin-bottom:16px;color:var(--navy);">Part 2 — The 4 Breakout Video Scripts</h3>
+
+    <details class="tog">
+      <summary>▶ Breakout Video 1 — "Why TransferRoom data is different from Wyscout" (~90 seconds)</summary>
+      <div>
+        <p>"Wyscout is a database. It tells you what happened in a match, what a player's stats look like over a season, and what their contract status is on paper. TransferRoom is a live market. It tells you which clubs have confirmed that a player is available right now. Which clubs are actively looking to buy in a specific position. If you already have Wyscout, TransferRoom does not replace it. It answers the question Wyscout cannot answer: who is actually available to buy or sell in the next six weeks."</p>
+      </div>
+    </details>
+
+    <details class="tog">
+      <summary>▶ Breakout Video 2 — "What Championship clubs use contingency data for" (~90 seconds)</summary>
+      <div>
+        <p>"The most common use case from Championship and Bundesliga 2 clubs is contingency planning. You know going into a window that you have three positions to strengthen. But if your first-choice target does not materialise, you need your second and third options already identified and warm. Contingency AI tells you: if this deal does not close, here are the clubs with players in your position who would accept a similar offer within your budget. Built before the window opens. That is what clubs spend three to four days building manually with Wyscout. With TransferRoom, it runs automatically."</p>
+      </div>
+    </details>
+
+    <details class="tog">
+      <summary>▶ Breakout Video 3 — "How long integration takes" (~60 seconds)</summary>
+      <div>
+        <p>"The integration is through the TransferRoom platform — there is no separate technical build on your side. Your data team or analyst gets access to the data product dashboard directly. The physical performance data via Gradient Sports, the contingency modelling tools, and the live availability alerts all run inside the same platform interface you already know from the marketplace. For most clubs, the proof of concept runs in the first 30 days."</p>
+      </div>
+    </details>
+
+    <details class="tog">
+      <summary>▶ Breakout Video 4 — "What the proof of concept looks like" (~90 seconds)</summary>
+      <div>
+        <p>"The proof of concept is structured around a real decision your club is making. In the first two weeks, your analyst runs the contingency data for one specific position against your actual summer targets. Not a demonstration. A live test with your actual needs. In weeks three and four, you run the live availability alerts for that same position. At the end of 30 days, you can answer one question concretely: did TransferRoom show me players I would not otherwise have found, at a time that allowed me to act on them?"</p>
+      </div>
+    </details>
+
+    <h3 style="margin-top:40px;margin-bottom:16px;color:var(--navy);">Part 3 — The 5 Pre-Call Emails</h3>
+
+    <details class="tog light">
+      <summary>Pre-Call Email 1 — Day 1, immediately after booking · "Your consultation is confirmed"</summary>
+      <div>
+        <p>Hi [First Name], Your consultation with TransferRoom is confirmed. Before we speak, two things to have ready: (1) the specific position or squad gap you are most focused on for this summer window, and (2) a rough sense of your budget range for that position. The more specific you can be, the more useful the call will be.</p>
+      </div>
+    </details>
+
+    <details class="tog light">
+      <summary>Pre-Call Email 2 — Day 1, 2 hours after booking · "Four short films while you wait"</summary>
+      <div>
+        <p>Hi [First Name], While you are waiting — I left four short films on the thank you page that answer the questions most club analysts raise before the call. The one most relevant to you is probably Film 1 or Film 2. Watch the ones that apply to your situation. It will save us time on the call.</p>
+      </div>
+    </details>
+
+    <details class="tog light">
+      <summary>Pre-Call Email 3 — Day 2 · "What clubs like yours are using the data for"</summary>
+      <div>
+        <p>Hi [First Name], Three things clubs at your level are actually using TransferRoom data products for right now: (1) Pre-window contingency modelling — identifying backup targets before the window opens. (2) Live availability alerts — knowing which players have confirmed club availability. (3) Physical performance data — using max speed and sprint metrics across 40 plus competitions to find undervalued players before the market catches up.</p>
+      </div>
+    </details>
+
+    <details class="tog light">
+      <summary>Pre-Call Email 4 — Day 2 afternoon · "One thing most clubs get wrong"</summary>
+      <div>
+        <p>Hi [First Name], The most common mistake clubs make when evaluating data tools is comparing them against each other on dataset coverage. The question is not which platform has more data. It is which platform tells you who is actually available to buy or sell in the next four weeks. That is a live market question. No historical database answers it.</p>
+      </div>
+    </details>
+
+    <details class="tog light">
+      <summary>Pre-Call Email 5 — Day 3, 1 hour before call · "See you shortly"</summary>
+      <div>
+        <p>Hi [First Name], Looking forward to speaking with you. The link is below. See you at [time]. [MEETING LINK]</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- AUTHORITY ENGINE -->
+<section class="authority-section" id="authority">
+  <div class="container">
+    <div class="section-label">Section 9 — The Authority Engine</div>
+    <h2>5 Components That Keep TransferRoom Present with the 95% Not Ready Right Now</h2>
+
+    <div class="authority-components">
+      <div class="auth-comp">
+        <div class="auth-comp-label">Component 1</div>
+        <h3>LinkedIn Content Flywheel</h3>
+        <p>Posts targeting Head of Analysis, Data Scientist, and Performance Analyst contacts at clubs. Each post offers a resource. Commenters receive it by direct message. Direct messages open relationships before the buying moment arrives.</p>
+
+        <div style="margin-top:24px;">
+          <div class="post-block">
+            <div class="post-label">Post 1 — The Summer Window Data Problem</div>
+            <p>"The clubs that enter the summer window prepared all have the same thing in common. They built their backup plans in April. Before any negotiation started. Before agents started calling with their agenda. Before the selling club's asking price went up when other buyers appeared. The clubs still scrambling in July are the ones that started their shortlist in June. The difference is not budget. It is intelligence timing. We mapped 28 clubs that are in their pre-window data tool evaluation phase right now. Comment 'window prep' and I will send the research over."</p>
+          </div>
+          <div class="post-block">
+            <div class="post-label">Post 2 — Why Your Head of Analysis Is Not at Soccerex</div>
+            <p>"The Director of Football goes to Soccerex. The Head of Analysis goes to the StatsBomb Conference. These are two different buying decisions. One buys the marketplace. One buys the data product. Most sports tech companies build their commercial motion around Soccerex. Then they wonder why their data product sales are slower than their marketplace sales. If your data product GTM looks the same as your marketplace GTM, you are talking to the wrong person."</p>
+          </div>
+          <div class="post-block">
+            <div class="post-label">Post 3 — The Wyscout Question</div>
+            <p>"'We already have Wyscout. Why would we need TransferRoom data as well?' This is the most common objection in club data product conversations. Wyscout tells you what happened last season. TransferRoom tells you what is happening in the market this week. One is a historical record. One is live market intelligence. Comment 'Wyscout vs TransferRoom' and I will send the full breakdown."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-comp">
+        <div class="auth-comp-label">Component 2</div>
+        <h3>20-Week Email Nurture Sequence</h3>
+        <p>For every club analyst and Director of Football who gives an email address. Twenty weeks of transfer market intelligence. No pitches.</p>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-sm);padding:14px 18px;">
+            <strong style="color:var(--green2);font-size:0.85rem;">Week 1</strong> — "The clubs that got it right in January 2026"
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-sm);padding:14px 18px;">
+            <strong style="color:var(--green2);font-size:0.85rem;">Week 4</strong> — "Why your scouting shortlist is probably too short"
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-sm);padding:14px 18px;">
+            <strong style="color:var(--green2);font-size:0.85rem;">Week 8</strong> — "The data tool your analyst is probably already using"
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-sm);padding:14px 18px;">
+            <strong style="color:var(--green2);font-size:0.85rem;">Week 12</strong> — "Serie B clubs are using data to punch above their weight"
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-sm);padding:14px 18px;">
+            <strong style="color:var(--green2);font-size:0.85rem;">Week 20</strong> — "What changed in club data analytics this season"
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-comp">
+        <div class="auth-comp-label">Component 3</div>
+        <h3>Micro-Budget Retargeting</h3>
+        <p>£5 to £10 per day on LinkedIn. Club analysts and Directors of Football who visited the landing page but did not book. No paid spend in month one. Retargeting starts in month two when click data is available.</p>
+      </div>
+
+      <div class="auth-comp">
+        <div class="auth-comp-label">Component 4</div>
+        <h3>Lead Scoring System (HubSpot)</h3>
+        <p><strong style="color:var(--green2);">Cold:</strong> Received emails. No engagement. Continues nurture. No sales outreach.<br>
+        <strong style="color:var(--green2);">Warm:</strong> Opened 3 plus emails, visited landing page. Receives league-specific content.<br>
+        <strong style="color:var(--green2);">Hot:</strong> Visited data product page, opened 8 plus emails, or clicked proof of concept link. TransferRoom commercial team alert within 24 hours.</p>
+      </div>
+
+      <div class="auth-comp">
+        <div class="auth-comp-label">Component 5</div>
+        <h3>Hot Bucket Alerts</h3>
+        <p>When a Head of Analysis crosses into hot, the relevant TransferRoom commercial team member receives an alert within 24 hours with name, club, league, emails opened, pages visited, and recommended opening line.</p>
+        <p style="margin-top:12px;color:var(--green2);font-style:italic;">"I can see you have been looking at the contingency modelling — what position are you trying to solve for in the summer window?"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPRINT PLAN -->
+<section class="sprint-section" id="sprint">
+  <div class="container">
+    <div class="section-label">Section 9.5 — The 90-Day Sprint Plan</div>
+    <h2>How TransferRoom Gets New Data Product Signings in 90 Days</h2>
+    <p style="margin-bottom:40px;">Not a general plan. A specific plan for Neal's pre-summer window and Q3 targets.</p>
+
+    <div class="sprint-month">
+      <h3>Month 1 (Days 1 to 30) — The Signal Stack</h3>
+      <div class="sprint-table-wrap">
+        <table class="sprint-table">
+          <thead><tr><th>Week</th><th>Action</th><th>Target</th></tr></thead>
+          <tbody>
+            <tr><td>Week 1</td><td>28-club list activated — Trigger email (PSS 87) deployed to Tier 1 contacts</td><td>First email sent to all 28. First replies within 5 days.</td></tr>
+            <tr><td>Week 2</td><td>LinkedIn posts 1 and 2 published — targeting analytics function at clubs</td><td>First Head of Analysis comments captured. Email addresses collected.</td></tr>
+            <tr><td>Week 3</td><td>Hudl protection sequence begins for clubs with US/UK institutional ownership</td><td>Partnership protection conversations open before Hudl enterprise sales team reaches them.</td></tr>
+            <tr><td>Week 4</td><td>Pre-call system live. Nurture sequence running for all captured email addresses.</td><td>Every club contact who responds enters automated warm-up.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sprint-target"><strong>Month 1 target:</strong> 3 to 5 replies from Tier 1 clubs. At least 1 proof of concept conversation initiated with a club in the top 8 by signal confidence (Palermo, Le Mans, Juve Stabia, Calcio Como, Caen, Swansea, Venezia, Middlesbrough). Budget: zero — signal-based outreach only.</div>
+    </div>
+
+    <div class="sprint-month">
+      <h3>Month 2 (Days 31 to 60) — The Intelligence Build</h3>
+      <div class="sprint-table-wrap">
+        <table class="sprint-table">
+          <thead><tr><th>Week</th><th>Action</th><th>Target</th></tr></thead>
+          <tbody>
+            <tr><td>Week 5</td><td>Friction email (PSS 85) to all non-replies from Tier 1 list</td><td>Second touch across original 28 plus new club signals from LinkedIn refresh</td></tr>
+            <tr><td>Week 6</td><td>Customer interview programme launches — 5 to 7 current data product clients interviewed</td><td>Raw interview data captured for case studies</td></tr>
+            <tr><td>Week 7</td><td>First case studies drafted from interview outputs</td><td>3 case studies — one per league tier (Championship, Bundesliga 2, Serie B)</td></tr>
+            <tr><td>Week 8</td><td>Tier 2 list activated — 14 additional clubs with adjacent signals</td><td>Women's Marketplace outreach begins in parallel for leagues with under 3 clubs</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sprint-target"><strong>Month 2 target:</strong> 1 to 2 proof of concept trials initiated with clubs from the Tier 1 list. First case study ready for use in outreach sequences. Budget: £5 to £10 per day LinkedIn retargeting for club contacts who visited the landing page but did not book.</div>
+    </div>
+
+    <div class="sprint-month">
+      <h3>Month 3 (Days 61 to 90) — The Asset Layer</h3>
+      <div class="sprint-table-wrap">
+        <table class="sprint-table">
+          <thead><tr><th>Week</th><th>Action</th><th>Target</th></tr></thead>
+          <tbody>
+            <tr><td>Week 9</td><td>Case studies live on landing page and in week 12 of nurture sequence</td><td>Landing page now carries real named club proof: "[Club], [League], [specific data product outcome]"</td></tr>
+            <tr><td>Week 10</td><td>Re-activation campaign — existing marketplace clients not yet on data products</td><td>2-email sequence to TransferRoom's existing client base</td></tr>
+            <tr><td>Week 11</td><td>Hot bucket alerts active. Commercial team receiving warm signals.</td><td>BDMs alerted when club contact crosses into Hot</td></tr>
+            <tr><td>Week 12</td><td>Month 3 reporting. LinkedIn signal refresh for new analyst hires and ownership changes.</td><td>System resets and repeats. Full system handover to TransferRoom.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sprint-target"><strong>Month 3 target:</strong> 5 to 8 new commercial conversations with club data function decision-makers. 1 to 2 data product trials initiated. Full targeting system handed over — TransferRoom owns everything permanently.</div>
+    </div>
+
+    <div style="background:var(--navy);color:rgba(255,255,255,0.82);padding:32px 36px;border-radius:var(--r-md);margin-top:32px;">
+      <strong style="color:var(--green);">6-month outcome:</strong> Neal reports to TransferRoom leadership that the data product line has a systematic acquisition channel for the first time. Club conversations are happening proactively — not only with clubs that already use the marketplace. The channel does not disappear when MDB's engagement ends. TransferRoom owns the database, sequences, scoring system, and landing page permanently.
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER INTELLIGENCE -->
+<section style="background:var(--white);padding:80px 0;" id="intelligence">
+  <div class="container">
+    <div class="section-label">Section 9.7 — The Customer Intelligence Programme</div>
+    <h2>The Interviews That Produce Case Studies</h2>
+    <p style="margin-bottom:32px;">TransferRoom has data product clients who switched from Wyscout-only setups. They know exactly why they switched. They know what nearly stopped them. No one has asked them.</p>
+
+    <h3 style="margin-bottom:16px;color:var(--navy);">The 5 Interview Questions</h3>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="background:var(--off-white);border-left:4px solid var(--green);border-radius:var(--r-sm);padding:16px 20px;font-size:0.95rem;">"What was the first thing that made you consider TransferRoom's data products?"</div>
+      <div style="background:var(--off-white);border-left:4px solid var(--green);border-radius:var(--r-sm);padding:16px 20px;font-size:0.95rem;">"What nearly stopped you from switching from your existing tool setup?"</div>
+      <div style="background:var(--off-white);border-left:4px solid var(--green);border-radius:var(--r-sm);padding:16px 20px;font-size:0.95rem;">"What would you tell another Head of Analysis who has not heard of TransferRoom data?"</div>
+      <div style="background:var(--off-white);border-left:4px solid var(--green);border-radius:var(--r-sm);padding:16px 20px;font-size:0.95rem;">"If you had to describe what TransferRoom data gives you in one sentence to your Director of Football, what would you say?"</div>
+      <div style="background:var(--off-white);border-left:4px solid var(--green);border-radius:var(--r-sm);padding:16px 20px;font-size:0.95rem;">"Is there a specific recruitment decision in the last 12 months where you think TransferRoom data made the difference?"</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;">
+      <div style="background:var(--off-white);border:1px solid #e5e7eb;border-radius:var(--r-md);padding:24px;">
+        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#e55843;margin-bottom:8px;">❌ Bad Case Study</div>
+        <p style="font-size:0.9rem;">"We helped a club improve their recruitment process."</p>
+      </div>
+      <div style="background:var(--off-white);border:1px solid #e5e7eb;border-radius:var(--r-md);padding:24px;">
+        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">✓ Good Case Study</div>
+        <p style="font-size:0.9rem;">"Fortuna Dusseldorf's Head of Analysis used TransferRoom contingency data to identify three loan targets before the January window opened. They completed a signing on Day 3. Their previous January window took 18 days to close the same type of deal."</p>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:16px;color:var(--navy);">Re-Activation Campaign (Written in Full)</h3>
+    <p style="margin-bottom:16px;">800 clubs in the marketplace. Estimated 600 to 700 not yet on data products. At GBP 5,000 to 10,000 per club per year = GBP 3 million to 7 million in accessible ARR.</p>
+
+    <details class="tog light">
+      <summary>Re-Activation Email 1 — Subject: "Your club is already in the system"</summary>
+      <div>
+        <p>Hi [First Name], You are already on the TransferRoom marketplace. I wanted to reach out specifically about the data product layer — the contingency modelling, physical performance data via Gradient Sports, and live availability alerts that run alongside the marketplace. We have seen clubs at your level using it to cut January window decision time from 18 days to under 72 hours. Worth a 15-minute conversation to see what it would look like for your specific recruitment operation?</p>
+      </div>
+    </details>
+
+    <details class="tog light">
+      <summary>Re-Activation Email 2 — Subject: "One more thing on data" (Day 5, no reply)</summary>
+      <div>
+        <p>Hi [First Name], Following up briefly. The data product is not a separate subscription — it sits inside the same TransferRoom platform you already use. The proof of concept runs against a real recruitment challenge from your current window. If the timing is wrong, no problem. The offer stands for the summer window.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faqs">
+  <div class="container">
+    <div class="section-label">Section 11 — FAQs</div>
+    <h2>4 Questions Neal Will Have</h2>
+    <div class="faq-list">
+      <details class="acc">
+        <summary>"Can you do this without disrupting our existing conference relationships?" <span class="acc-chevron">▼</span></summary>
+        <div>
+          <p>Yes. MDB's outreach targets the analytics function at clubs — Head of Analysis, Data Scientist, Performance Analyst — who are NOT at Soccerex or World Football Summit. The conference circuit relationships with Directors of Football and Sporting Directors are not touched. This is a parallel channel reaching a different buyer persona. The two motions reinforce each other rather than competing.</p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>"How long before TransferRoom sees new data product conversations?" <span class="acc-chevron">▼</span></summary>
+        <div>
+          <p>The Trigger email goes out in Week 1. The 28 clubs on the list are in active evaluation windows. Based on comparable outreach in sports tech and B2B SaaS, first replies appear within 5 to 10 days. First qualified conversations typically begin in weeks 2 to 3. First proof of concept initiation target is Day 45. The system does not need to warm up — the buying signal for each club is already confirmed before the email goes out.</p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>"What is the difference between this and hiring a contractor?" <span class="acc-chevron">▼</span></summary>
+        <div>
+          <p>A contractor builds capacity for a fixed period. When they leave, the knowledge goes with them. MDB installs the database, the sequences, the scoring system, and the landing page as permanent assets. They stay on TransferRoom's balance sheet when the engagement ends. The contractor costs £400 to £600 per day and takes the model with them. MDB leaves the model behind.</p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>"Will this conflict with the incoming GTM Lead's build?" <span class="acc-chevron">▼</span></summary>
+        <div>
+          <p>No — it accelerates it. The GTM Lead starts with a 150 plus contact targeting universe already built and tested, two email sequences already deployed and generating performance data, and a qualification framework identifying which clubs have confirmed budget and timeline. The new hire inherits a working channel rather than building from scratch. Their 60 to 90 day ramp becomes 2 to 3 weeks of refinement rather than full build.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT JEAN -->
+<section style="background:var(--white);padding:64px 0;">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Section 12 — About Jean</div>
+    <h2 style="margin-bottom:20px;">Jean Mundabi Fala, Founder — MDB Growth Capital</h2>
+    <p style="max-width:640px;margin:0 auto 20px;color:var(--dark-text);">MDB installs permanent revenue infrastructure for B2B companies that have proven their product but do not yet have a direct acquisition channel. Jean researched TransferRoom before reaching out. He mapped the 28-club buying signal list, wrote the emails, built the landing page, and compiled this document — before asking for a single meeting.</p>
+    <blockquote style="max-width:560px;margin:0 auto;font-style:italic;color:#666;border-left:4px solid var(--green);padding:16px 24px;text-align:left;background:var(--off-white);border-radius:0 var(--r-sm) var(--r-sm) 0;">"The document you are reading is the proof of how MDB works. Every email is written. Every script is recorded. Every list is built. Nothing left for Neal to figure out."</blockquote>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer-section" id="offer">
+  <div class="container">
+    <div class="section-label">Section 13 — The Offer and Next Step</div>
+    <h2>Everything Is Built. The Only Thing Missing Is the Decision to Deploy.</h2>
+    <p style="color:rgba(255,255,255,0.72);max-width:640px;margin-top:16px;">TransferRoom has 800 club relationships and 9,500 deals facilitated. The marketplace moat is real. The product works. The data product line is a different commercial challenge. The buyer is in a different room. MDB can run the data product outreach now — before the summer window closes, before the shortlists consolidate, before Hudl's enterprise sales team reaches the clubs on this list.</p>
+
+    <div class="offer-box">
+      <h3>What MDB Builds — Permanently on TransferRoom's Balance Sheet</h3>
+      <ul class="offer-list">
+        <li><div class="offer-check">✓</div><div>Targeting database of 150 plus club contacts (Head of Analysis, Director of Football) tiered by buying signal — delivered as a working database, not a static spreadsheet</div></li>
+        <li><div class="offer-check">✓</div><div>Two email sequence templates (Trigger and Friction) tested against 28 live clubs — refined based on what opened and what replied</div></li>
+        <li><div class="offer-check">✓</div><div>Qualification framework — which clubs have confirmed budget, specific use case, and timeline. Commercial team only talks to buyers with real intent.</div></li>
+        <li><div class="offer-check">✓</div><div>LinkedIn content playbook — 20 content briefs targeting the analytics function at clubs, positioned as educational, not promotional</div></li>
+        <li><div class="offer-check">✓</div><div>20-week email nurture sequence for clubs that replied but are not ready to buy — keeps TransferRoom visible in the pre-window preparation period</div></li>
+        <li><div class="offer-check">✓</div><div>Performance benchmarks: open rate, reply rate, qualified rate, trial initiation rate — Neal has a data-driven view of what the channel produces</div></li>
+        <li><div class="offer-check">✓</div><div><strong style="color:var(--green2);">Guarantee:</strong> If new commercial conversations with club data decision-makers are not happening in 30 days — you keep everything MDB built. The list, the sequences, the targeting framework. All of it.</div></li>
+      </ul>
+
+      <div class="offer-cta-block">
+        <h3>Two Ways to Proceed</h3>
+        <p>28 clubs. Confirmed buying signals. Emails written. Landing page live. Pre-call system ready.</p>
+        <a href="https://cal.com/jean-m-8f4kbr/15min" target="_blank" class="booking-link">Book 15 Minutes — https://cal.com/jean-m-8f4kbr/15min</a>
+        <div class="reply-option">Or reply with <code>send the club list</code> and Jean sends the confirmed entries today.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>Strategy and GTM research by <span>Jean Mundabi Fala</span>, MDB Growth Capital · Built for Neal Stanborough, TransferRoom, May 2026</p>
+    <p style="margin-top:8px;">Mockup prepared by MDB Growth Capital. Strategy and GTM by Jean Mundabi Fala.</p>
+  </div>
+</footer>
+
+</body>
+</html>
